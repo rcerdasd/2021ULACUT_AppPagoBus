@@ -154,9 +154,12 @@ hr {
                     <asp:TextBox ID="txtIdentificacion" Placeholder="Ingrese su identificacion" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvIdentificacion" runat="server" 
                         ErrorMessage="La identificacion es requerida" ControlToValidate="txtIdentificacion" ForeColor="Maroon"></asp:RequiredFieldValidator>
-                    <asp:TextBox ID="txtNombre" Placeholder="Ingrese su nombre y apellidos" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtNombre" Placeholder="Ingrese su nombre" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvNombre" runat="server" 
                         ErrorMessage="El nombre es requerido" ControlToValidate="txtNombre" ForeColor="Maroon"></asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="txtApellido" Placeholder="Ingrese su apellido" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvApellido" runat="server" 
+                        ErrorMessage="El apellido es requerido" ControlToValidate="txtNombre" ForeColor="Maroon"></asp:RequiredFieldValidator>
                     <asp:TextBox ID="txtEmail" Placeholder="Ingrese su correo electronico" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
                         ErrorMessage="El correo electronico es requerido" ControlToValidate="txtEmail" ForeColor="Maroon"></asp:RequiredFieldValidator>
@@ -167,6 +170,8 @@ hr {
                     <asp:RequiredFieldValidator ID="rfvFechaNac" runat="server" ForeColor="Maroon"
                         ErrorMessage="La fecha de nacimiento es requerida" ControlToValidate="txtFechaNacimiento"></asp:RequiredFieldValidator>
                     <asp:TextBox ID="txtUsername" Placeholder="Ingrese su nombre de usuario" runat="server"></asp:TextBox>
+                    <asp:Label ID="lblTipoUsuario" runat="server" Text="Tipo de usuario" AssociatedControlID="ddlTipoUsuario"></asp:Label>
+                    <asp:DropDownList ID="ddlTipoUsuario" runat="server"></asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ForeColor="Maroon"
                         ErrorMessage="El nombre de usuario es requerido" ControlToValidate="txtUsername"></asp:RequiredFieldValidator>
                     <asp:TextBox ID="txtPassword" Placeholder="Ingrese su password" TextMode="Password" runat="server"></asp:TextBox>
