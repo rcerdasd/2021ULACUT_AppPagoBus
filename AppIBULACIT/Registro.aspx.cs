@@ -37,7 +37,15 @@ namespace AppPagoBus
 
                     Persona persona = new Persona()
                     {
-
+                        Nombre = txtNombre.Text,
+                        Apellido = txtApellido.Text,
+                        Identificacion = txtIdentificacion.Text,
+                        FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text),
+                        Usuario = txtUsername.Text,
+                        Contrasena = txtPassword.Text,
+                        Email = txtEmail.Text,
+                        Tipo = ddlTipoUsuario.SelectedItem.Value,
+                        Saldo = 0
                     };
 
                     Persona usuarioRegistrado = await personaManager.Registrar(persona);
