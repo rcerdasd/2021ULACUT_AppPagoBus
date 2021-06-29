@@ -43,6 +43,7 @@ namespace AppPagoBus
                             Session["Email"] = persona.Email;
                             Session["Saldo"] = persona.Saldo;
                             Session["Token"] = persona.Token;
+                            Session["Tipo"] = persona.Tipo;
 
                             FormsAuthentication.RedirectFromLoginPage(persona.Usuario, false);
 

@@ -199,6 +199,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Views\frmRuta.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -222,6 +223,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\PersonaManager.cs" />
+    <Compile Include="Controllers\RutaManager.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -241,6 +243,7 @@
     </Compile>
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\Persona.cs" />
+    <Compile Include="Models\Ruta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
@@ -269,6 +272,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmRuta.aspx.cs">
+      <DependentUpon>frmRuta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmRuta.aspx.designer.cs">
+      <DependentUpon>frmRuta.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
