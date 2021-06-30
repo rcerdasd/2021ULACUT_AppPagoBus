@@ -9,8 +9,7 @@ using System.Web.Http;
 using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
-{
-    [Authorize]
+{   
     [RoutePrefix("api/ruta")]
     public class RutaController : ApiController
     {
