@@ -11,7 +11,7 @@ namespace AppIBULACIT.Views
 {
 
 
-    public partial class frmRuta
+    public partial class frmTarjeta
     {
 
         /// <summary>

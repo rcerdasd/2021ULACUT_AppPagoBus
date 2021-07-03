@@ -51,7 +51,7 @@ namespace AppIBULACIT
                     Persona choferRegistrado = await personaManager.Registrar(persona);
 
                     if (!string.IsNullOrEmpty(persona.Identificacion))
-                        Response.Redirect("Login.aspx");
+                        Response.Redirect("Views/frmChofer.aspx");
                     else
                     {
                         lblStatus.Text = "Hubo un error al registrar el chofer.";

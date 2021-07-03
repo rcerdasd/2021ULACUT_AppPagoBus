@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace AppIBULACIT.Views
 {
-    public partial class frmRuta : System.Web.UI.Page
+    public partial class frmChofer : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,8 +16,8 @@ namespace AppIBULACIT.Views
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../Ruta.aspx");
-
+           Response.Redirect("../Chofer.aspx");
+           
         }
     }
 }
