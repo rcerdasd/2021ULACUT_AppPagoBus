@@ -1,11 +1,12 @@
-﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AppPagoBus.Login" %>
+﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="Ruta.aspx.cs" Inherits="AppIBULACIT.Ruta" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Login</title>
-          <style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Ruta</title>
+      <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
@@ -144,25 +145,25 @@ hr {
       </style>  
 </head>
 <body>
-    <div id="myModal" class="modal">
-        <form class="modal-content animate" runat="server">
-            <div class="imgcontainer">
-                <img src="img/img_avatar2.png" class="avatar" width="100" height="100" style="align-items:center" />
-            </div>
-            <div class="container">
-                <h1>Login</h1>
-                <asp:TextBox Placeholder="Ingrese su nombre de usuario" ID="txtUsername" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvUsuario" runat="server" ErrorMessage="Debe ingresar el nombre de usuario" ControlToValidate="txtUsername"></asp:RequiredFieldValidator>
-                <asp:TextBox Placeholder="Ingrese su contraseña" TextMode="Password" ID="txtPassword" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="La contraseña es requerida" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>              
-                <asp:Label ID="lblStatus" runat="server" Text="Error" Visible="false" ForeColor="Maroon"></asp:Label>
-            </div>
-            <div class="container" style="background-color:white">
-                <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" CssClass="normalbtn" OnClick="btnAceptar_Click"/>
-                <input type="reset" value="Limpiar" class="cancelbtn" />
-                <asp:HyperLink ID="hplRegistrar" runat="server" NavigateUrl="~/Registro.aspx">Registrarme</asp:HyperLink>
-            </div>
-        </form>
-    </div>
+        <div id="myModal" class="modal">
+            <form class="modal-content animate" runat="server">
+                <div class="imgcontainer">
+                    &nbsp;<img src="img/img_avatar2.png" class="auto-style1" /></div>
+                <div class="container">
+                    <h1>Agregar Ruta</h1>
+                    <asp:TextBox ID="txtCosto" Placeholder="Costo" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvCosto" runat="server" 
+                        ErrorMessage="El costo es requerido" ControlToValidate="txtCosto" ForeColor="Maroon"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtDescripcion" Placeholder="Descripcion" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvDescripcion" runat="server" 
+                        ErrorMessage="Una descripción es requerida" ControlToValidate="txtDescripcion" ForeColor="Maroon"></asp:RequiredFieldValidator> 
+                    <asp:Label ID="lblStatus" runat="server" Text="" Visible="false" ForeColor="Maroon"></asp:Label>
+                </div>
+                <div class="container">
+                    <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="normalbtn" OnClick="btnAgregar_Click" />
+                    <input type="reset" value="Limpiar" class="cancelbtn" />
+                </div>
+            </form>
+        </div>
 </body>
 </html>

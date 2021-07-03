@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AppIBULACIT.Models
 {
-    public class Tarjeta
+    public class TarjetaModel
     {
         public int Codigo { get; set; }
         public int Numero { get; set; }
