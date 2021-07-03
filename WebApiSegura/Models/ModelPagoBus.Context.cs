@@ -31,5 +31,6 @@ namespace WebApiSegura.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tarjeta> Tarjeta { get; set; }
         public virtual DbSet<Transaccion> Transaccion { get; set; }
+        public virtual DbSet<RutaChofer> RutaChofer { get; set; }
     }
 }

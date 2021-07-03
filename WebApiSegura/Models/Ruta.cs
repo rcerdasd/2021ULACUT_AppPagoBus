@@ -18,13 +18,17 @@ namespace WebApiSegura.Models
         public Ruta()
         {
             this.Transaccion = new HashSet<Transaccion>();
+            this.RutaChofer = new HashSet<RutaChofer>();
         }
     
         public int Codigo { get; set; }
         public int Costo { get; set; }
         public string Descripcion { get; set; }
+        public string Provincia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaccion> Transaccion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RutaChofer> RutaChofer { get; set; }
     }
 }

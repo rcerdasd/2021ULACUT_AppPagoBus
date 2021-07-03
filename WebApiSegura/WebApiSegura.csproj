@@ -222,6 +222,9 @@
     <Compile Include="Models\Ruta.cs">
       <DependentUpon>ModelPagoBus.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RutaChofer.cs">
+      <DependentUpon>ModelPagoBus.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ModelPagoBus.tt</DependentUpon>
     </Compile>
