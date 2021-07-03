@@ -10,6 +10,7 @@ using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
 {   
+    [AllowAnonymous]
     [RoutePrefix("api/ruta")]
     public class RutaController : ApiController
     {
@@ -96,12 +97,13 @@ namespace WebApiSegura.Controllers
                     new SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
                     SqlCommand sqlCommand =
-                        new SqlCommand(@"INSERT INTO Ruta (Costo, Descripcion) 
-                                         VALUES (@Costo, @Descripcion)",
+                        new SqlCommand(@"INSERT INTO Ruta (Costo, Descripcion, Provincia) 
+                                         VALUES (@Costo, @Descripcion, @Provincia)",
                                          sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Costo", ruta.Costo);
                     sqlCommand.Parameters.AddWithValue("@Descripcion", ruta.Descripcion);
+                    sqlCommand.Parameters.AddWithValue("@Provincia", ruta.Provincia);
 
                     sqlConnection.Open();
 

@@ -5,10 +5,12 @@ using System.Web;
 
 namespace AppIBULACIT.Models
 {
-    public class RutaModel
+    public class Ruta
     {
         public int Codigo { get; set; }
         public int Costo { get; set; }
         public string Descripcion { get; set; }
+
+        public string Provincia { get; set; }
     }
 }

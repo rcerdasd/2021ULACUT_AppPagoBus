@@ -16,6 +16,9 @@
         <AssociationConnector Association="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK_Transaccion_ClienteTarjeta" ManuallyRouted="false" />
         <AssociationConnector Association="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK_Transaccion_Persona" ManuallyRouted="false" />
         <AssociationConnector Association="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK_Transaccion_Ruta" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.RutaChofer" Width="1.5" PointX="8.25" PointY="3.5" />
+        <AssociationConnector Association="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__68487DD7" />
+        <AssociationConnector Association="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__6754599E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
