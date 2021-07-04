@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AppIBULACIT
+namespace AppPagoBus
 {
     public partial class Chofer : System.Web.UI.Page
     {

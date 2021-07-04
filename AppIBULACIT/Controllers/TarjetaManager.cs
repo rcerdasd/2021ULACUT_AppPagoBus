@@ -1,4 +1,4 @@
-﻿using AppIBULACIT.Models;
+﻿using AppPagoBus.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace AppIBULACIT.Controllers
+namespace AppPagoBus.Controllers
 {
     public class TarjetaManager
     {

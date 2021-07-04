@@ -1,5 +1,5 @@
-﻿using AppIBULACIT.Controllers;
-using AppIBULACIT.Models;
+﻿using AppPagoBus.Controllers;
+using AppPagoBus.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AppIBULACIT.Views
+namespace AppPagoBus.Views
 {
     public partial class frmRuta : System.Web.UI.Page
     {
@@ -42,6 +42,12 @@ namespace AppIBULACIT.Views
             }
         }
 
+        private void limpiarlblResultado()
+        {
+            lblResultado.Visible = false;
+            lblResultado.Text = string.Empty;
+        }
+
         protected void gvRutas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
@@ -49,6 +55,7 @@ namespace AppIBULACIT.Views
             switch (e.CommandName)
             {
                 case "Modificar":
+                    limpiarlblResultado();
                     ltrTituloMantenimiento.Text = "Mantenimiento rutas";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
@@ -73,9 +80,7 @@ namespace AppIBULACIT.Views
 
             try
             {
-                lblResultado.Text = string.Empty;
-                lblResultado.ForeColor = Color.Maroon;
-                lblResultado.Visible = false;
+                limpiarlblResultado();
                 abrirMant();
             }
             catch (Exception)
@@ -203,7 +208,8 @@ namespace AppIBULACIT.Views
 
         protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtProvincia.Text = ddlProvincia.SelectedItem.Text;
+            txtProvincia.Text = ddlProvincia.SelectedValue.ToString();
+            
         }
     }
 }
