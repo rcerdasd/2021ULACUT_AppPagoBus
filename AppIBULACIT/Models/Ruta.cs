@@ -10,7 +10,6 @@ namespace AppIBULACIT.Models
         public int Codigo { get; set; }
         public int Costo { get; set; }
         public string Descripcion { get; set; }
-
         public string Provincia { get; set; }
     }
 }

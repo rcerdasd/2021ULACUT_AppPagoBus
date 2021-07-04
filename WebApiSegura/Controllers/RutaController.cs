@@ -10,7 +10,7 @@ using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
 {   
-    [AllowAnonymous]
+    [Authorize]
     [RoutePrefix("api/ruta")]
     public class RutaController : ApiController
     {
@@ -23,7 +23,7 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Costo, Descripcion
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Costo, Descripcion, Provincia
                                                              FROM   Ruta
                                                              WHERE Codigo = @Codigo", sqlConnection);
 
@@ -38,6 +38,7 @@ namespace WebApiSegura.Controllers
                         ruta.Codigo = sqlDataReader.GetInt32(0);
                         ruta.Costo = sqlDataReader.GetInt32(1);
                         ruta.Descripcion = sqlDataReader.GetString(2);
+                        ruta.Provincia = sqlDataReader.GetString(3);
                     }
 
                     sqlConnection.Close();
@@ -60,7 +61,7 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Costo, Descripcion FROM Ruta", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Costo, Descripcion, Provincia FROM Ruta", sqlConnection);
                     sqlConnection.Open();
 
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -71,6 +72,7 @@ namespace WebApiSegura.Controllers
                         ruta.Codigo = sqlDataReader.GetInt32(0);
                         ruta.Costo = sqlDataReader.GetInt32(1);
                         ruta.Descripcion = sqlDataReader.GetString(2);
+                        ruta.Provincia = sqlDataReader.GetString(3);
 
                         cuentas.Add(ruta);
                     }
@@ -134,14 +136,16 @@ namespace WebApiSegura.Controllers
                     SqlCommand sqlCommand =
                         new SqlCommand(@" UPDATE Ruta 
                                                         SET Costo = @Costo, 
-                                                            Descripcion = @Descripcion
+                                                            Descripcion = @Descripcion,
+                                                            Provincia = @Provincia
                                           WHERE Codigo = @Codigo",
                                          sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Codigo", ruta.Codigo);
                     sqlCommand.Parameters.AddWithValue("@Costo", ruta.Costo);
                     sqlCommand.Parameters.AddWithValue("@Descripcion", ruta.Descripcion);
- 
+                    sqlCommand.Parameters.AddWithValue("@Provincia", ruta.Provincia);
+
                     sqlConnection.Open();
 
                     int filasAfectadas = sqlCommand.ExecuteNonQuery();
