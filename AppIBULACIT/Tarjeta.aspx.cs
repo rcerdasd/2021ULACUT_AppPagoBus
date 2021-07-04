@@ -1,5 +1,5 @@
-﻿using AppIBULACIT.Controllers;
-using AppIBULACIT.Models;
+﻿using AppPagoBus.Controllers;
+using AppPagoBus.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AppIBULACIT
+namespace AppPagoBus
 {
     public partial class Tarjeta : System.Web.UI.Page
     {

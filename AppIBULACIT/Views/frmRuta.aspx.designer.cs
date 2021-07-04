@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppIBULACIT.Views
+namespace AppPagoBus.Views
 {
 
 

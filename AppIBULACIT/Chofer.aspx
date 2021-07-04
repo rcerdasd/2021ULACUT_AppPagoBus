@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="Chofer.aspx.cs" Inherits="AppIBULACIT.Chofer" %>
+﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="Chofer.aspx.cs" Inherits="AppPagoBus.Chofer" %>
 
 <!DOCTYPE html>
 

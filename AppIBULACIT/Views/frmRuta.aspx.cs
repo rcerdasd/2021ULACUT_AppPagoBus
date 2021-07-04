@@ -1,5 +1,5 @@
-﻿using AppIBULACIT.Controllers;
-using AppIBULACIT.Models;
+﻿using AppPagoBus.Controllers;
+using AppPagoBus.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AppIBULACIT.Views
+namespace AppPagoBus.Views
 {
     public partial class frmRuta : System.Web.UI.Page
     {
@@ -42,6 +42,12 @@ namespace AppIBULACIT.Views
             }
         }
 
+        private void limpiarlblResultado()
+        {
+            lblResultado.Visible = false;
+            lblResultado.Text = string.Empty;
+        }
+
         protected void gvRutas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
@@ -49,6 +55,7 @@ namespace AppIBULACIT.Views
             switch (e.CommandName)
             {
                 case "Modificar":
+                    limpiarlblResultado();
                     ltrTituloMantenimiento.Text = "Mantenimiento rutas";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
@@ -69,6 +76,23 @@ namespace AppIBULACIT.Views
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                limpiarlblResultado();
+                abrirMant();
+            }
+            catch (Exception)
+            {
+                lblStatus.Text = "Error";
+                lblStatus.Visible = true;
+                lblStatus.ForeColor = Color.Maroon;
+            }
+            
+        }
+
+        private void abrirMant()
         {
             ltrTituloMantenimiento.Text = "Nueva ruta";
             btnAceptarMant.ControlStyle.CssClass = "btn btn-sucess";
@@ -109,65 +133,83 @@ namespace AppIBULACIT.Views
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCodigoMant.Text))
+            try
             {
-                Ruta ruta = new Ruta()
+                if (string.IsNullOrEmpty(txtCodigoMant.Text))
                 {
-                    Costo = Convert.ToInt32(txtCosto.Text),
-                    Descripcion = txtDescripcion.Text,
-                    Provincia = ddlProvincia.SelectedValue
-                };
+                    Ruta ruta = new Ruta()
+                    {
+                        Costo = Convert.ToInt32(txtCosto.Text),
+                        Descripcion = txtDescripcion.Text,
+                        Provincia = txtProvincia.Text
+                    };
 
-                Ruta rutaIngresada = await rutaManager.Ingresar(ruta, Session["Token"].ToString());
+                    Ruta rutaIngresada = await rutaManager.Ingresar(ruta, Session["Token"].ToString());
 
-                if (!string.IsNullOrEmpty(rutaIngresada.Descripcion))
-                {
-                    lblResultado.Text = "Servicio ingresado con exito";
-                    lblResultado.ForeColor = Color.Green;
-                    lblResultado.Visible = true;
-                    btnAceptarMant.Visible = false;
-                    InicializarControles();
+                    if (!string.IsNullOrEmpty(rutaIngresada.Descripcion))
+                    {
+                        lblResultado.Text = "Servicio ingresado con exito";
+                        lblResultado.ForeColor = Color.Green;
+                        lblResultado.Visible = true;
+                        btnAceptarMant.Visible = false;
+                        InicializarControles();
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al ingresar el servicio";
+                        lblResultado.ForeColor = Color.Maroon;
+                        lblResultado.Visible = true;
+                        abrirMant();
+                    }
                 }
                 else
                 {
-                    lblResultado.Text = "Hubo un error al ingresar el servicio";
-                    lblResultado.ForeColor = Color.Maroon;
-                    lblResultado.Visible = true;
+                    Ruta ruta = new Ruta()
+                    {
+                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                        Costo = Convert.ToInt32(txtCosto.Text),
+                        Descripcion = txtDescripcion.Text,
+                        Provincia = txtProvincia.Text
+
+                    };
+
+                    Ruta rutaModificada = await rutaManager.Actualizar(ruta, Session["Token"].ToString());
+
+                    if (!string.IsNullOrEmpty(rutaModificada.Descripcion))
+                    {
+                        lblResultado.Text = "Ruta modificada con exito";
+                        lblResultado.ForeColor = Color.Green;
+                        lblResultado.Visible = true;
+                        btnAceptarMant.Visible = false;
+                        InicializarControles();
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al modificar la ruta";
+                        lblResultado.ForeColor = Color.Maroon;
+                        lblResultado.Visible = true;
+                    }
                 }
             }
-            else
+            catch (Exception)
             {
-                Ruta ruta = new Ruta()
-                {
-                    Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                    Costo = Convert.ToInt32(txtCosto.Text),
-                    Descripcion = txtDescripcion.Text,
-                    Provincia = ddlProvincia.SelectedValue
 
-                };
-
-                Ruta rutaModificada = await rutaManager.Actualizar(ruta, Session["Token"].ToString());
-
-                if (!string.IsNullOrEmpty(rutaModificada.Descripcion))
-                {
-                    lblResultado.Text = "Ruta modificada con exito";
-                    lblResultado.ForeColor = Color.Green;
-                    lblResultado.Visible = true;
-                    btnAceptarMant.Visible = false;
-                    InicializarControles();
-                }
-                else
-                {
-                    lblResultado.Text = "Hubo un error al modificar la ruta";
-                    lblResultado.ForeColor = Color.Maroon;
-                    lblResultado.Visible = true;
-                }
+                lblResultado.Text = "Datos invalidos";
+                lblResultado.ForeColor = Color.Maroon;
+                lblResultado.Visible = true;
+                abrirMant();
             }
         }
 
         protected void btnCancelarMant_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {​​​ CloseMantenimiento(); }​​​);", true);
+        }
+
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtProvincia.Text = ddlProvincia.SelectedValue.ToString();
+            
         }
     }
 }

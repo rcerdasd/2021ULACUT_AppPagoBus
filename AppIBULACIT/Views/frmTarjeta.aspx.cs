@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AppIBULACIT.Views
+namespace AppPagoBus.Views
 {
     public partial class frmTarjeta : System.Web.UI.Page
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="frmRuta.aspx.cs" Inherits="AppIBULACIT.Views.frmRuta" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="frmRuta.aspx.cs" Inherits="AppPagoBus.Views.frmRuta" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         function openModal() {
@@ -34,7 +34,7 @@
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="Costo" DataField="Costo" />
             <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
-            <asp:BoundField HeaderText="Provincia" DataField="Provincia" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
+            <asp:BoundField HeaderText="Provincia" DataField="Provincia" />
             <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
             <asp:ButtonField HeaderText="Eliminar" CommandName="Eliminar" ControlStyle-CssClass="btn btn-danger" ButtonType="Button" Text="Eliminar" />
         </Columns>
@@ -96,7 +96,7 @@
                                                         <td>
                                 <asp:TextBox ID="txtProvincia" runat="server" CssClass="form-control" /></td>
                             <td>
-                                <asp:DropDownList ID="ddlProvincia" CssClass="form-control" runat="server">
+                                <asp:DropDownList OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged" ID="ddlProvincia" CssClass="form-control" runat="server">
                                     <asp:ListItem Value="San Jose">San Jose</asp:ListItem>
                                     <asp:ListItem Value="Alajuela">Alajuela</asp:ListItem>
                                     <asp:ListItem Value="Cartago">Cartago</asp:ListItem>

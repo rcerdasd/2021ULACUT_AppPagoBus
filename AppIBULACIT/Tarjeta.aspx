@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="Tarjeta.aspx.cs" Inherits="AppIBULACIT.Tarjeta" %>
+﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="Tarjeta.aspx.cs" Inherits="AppPagoBus.Tarjeta" %>
 
 <!DOCTYPE html>
 

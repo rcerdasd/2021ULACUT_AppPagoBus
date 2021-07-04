@@ -1,4 +1,4 @@
-﻿using AppIBULACIT.Models;
+﻿using AppPagoBus.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace AppIBULACIT.Controllers
+namespace AppPagoBus.Controllers
 {
     public class RutaManager
     {
@@ -44,9 +44,9 @@ namespace AppIBULACIT.Controllers
 
         public async Task<Ruta> Ingresar(Ruta ruta, string token)
         {
-           HttpClient httpClient = GetClient(token);
+            HttpClient httpClient = GetClient(token);
 
-            var response = await httpClient.PostAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(ruta), Encoding.UTF8, "application/jon"));
+            var response = await httpClient.PostAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(ruta), Encoding.UTF8, "application/json"));
 
             return JsonConvert.DeserializeObject<Ruta>(await response.Content.ReadAsStringAsync());
         }
