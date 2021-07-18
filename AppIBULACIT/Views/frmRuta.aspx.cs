@@ -17,13 +17,12 @@ namespace AppPagoBus.Views
         RutaManager rutaManager = new RutaManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Token"]==null)
+            if (!IsPostBack)
             {
-                Response.Redirect("../Login.aspx");
-            }
-            else
-            {
-                InicializarControles();
+                if (Session["CodigoUsuario"] == null)
+                    Response.Redirect("~/Login.aspx");
+                else
+                    InicializarControles();
             }
         }
 
