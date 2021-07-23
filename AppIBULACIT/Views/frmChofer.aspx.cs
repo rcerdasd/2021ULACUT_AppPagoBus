@@ -8,13 +8,14 @@ using AppPagoBus.Controllers;
 using AppPagoBus.Models;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using AppIBULACIT.Controllers;
 
 namespace AppPagoBus.Views
 {
     public partial class frmChofer : System.Web.UI.Page
     {
         IEnumerable<Persona> choferList = new ObservableCollection<Persona>();
-        PersonaManager personaManager = new PersonaManager();
+        ChoferManager personaManager = new ChoferManager();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Token"] == null)
