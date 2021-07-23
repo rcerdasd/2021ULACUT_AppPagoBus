@@ -23,6 +23,28 @@ namespace AppPagoBus
         {
             if (Session["CodigoUsuario"] == null)
                 Response.Redirect("~/Login.aspx");
+            else
+                inicializarSaldo();
+        }
+
+        protected void inicializarSaldo()
+        {
+            try
+            {
+                string tipoUsuario = Session["Tipo"].ToString();
+                if (tipoUsuario.Equals("1"))
+                {
+                    lblSaldoCliente.Text = "Tu saldo es de ₡" + Session["Saldo"].ToString();
+                    lblSaldoCliente.Visible = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                lblSaldoCliente.Text = "No se pudo cargar el saldo";
+                lblSaldoCliente.Visible = true;
+            }
+
         }
     }
 }
