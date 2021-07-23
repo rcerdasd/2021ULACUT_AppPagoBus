@@ -60,7 +60,7 @@ namespace AppPagoBus.Views
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
                     txtCosto.Text = row.Cells[1].Text.Trim();
                     txtDescripcion.Text = row.Cells[2].Text.Trim();
-                    txtProvincia.Text = row.Cells[3].Text.Trim();
+                    ddlProvincia.Text = row.Cells[3].Text.Trim();
                     btnAceptarMant.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
                     break;
@@ -76,7 +76,6 @@ namespace AppPagoBus.Views
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-
             try
             {
                 limpiarlblResultado();
@@ -87,8 +86,7 @@ namespace AppPagoBus.Views
                 lblStatus.Text = "Error";
                 lblStatus.Visible = true;
                 lblStatus.ForeColor = Color.Maroon;
-            }
-            
+            }          
         }
 
         private void abrirMant()
@@ -104,11 +102,9 @@ namespace AppPagoBus.Views
             txtCosto.Visible = true;
             ltrProvincia.Visible = true;
             ddlProvincia.Visible = true;
-            txtProvincia.Visible = true;
             txtCodigoMant.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
             txtCosto.Text = string.Empty;
-            txtProvincia.Text = string.Empty;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
         }
 
@@ -140,7 +136,7 @@ namespace AppPagoBus.Views
                     {
                         Costo = Convert.ToInt32(txtCosto.Text),
                         Descripcion = txtDescripcion.Text,
-                        Provincia = txtProvincia.Text
+                        Provincia = ddlProvincia.Text
                     };
 
                     Ruta rutaIngresada = await rutaManager.Ingresar(ruta, Session["Token"].ToString());
@@ -168,7 +164,7 @@ namespace AppPagoBus.Views
                         Codigo = Convert.ToInt32(txtCodigoMant.Text),
                         Costo = Convert.ToInt32(txtCosto.Text),
                         Descripcion = txtDescripcion.Text,
-                        Provincia = txtProvincia.Text
+                        Provincia = ddlProvincia.Text
 
                     };
 
@@ -207,7 +203,7 @@ namespace AppPagoBus.Views
 
         protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtProvincia.Text = ddlProvincia.SelectedValue.ToString();
+            ddlProvincia.Text = ddlProvincia.SelectedValue.ToString();
             
         }
     }

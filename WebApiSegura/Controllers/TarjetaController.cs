@@ -56,7 +56,7 @@ namespace WebApiSegura.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            List<Tarjeta> cuentas = new List<Tarjeta>();
+            List<Tarjeta> tarjetas = new List<Tarjeta>();
             try
             {
                 using (SqlConnection sqlConnection = new
@@ -77,7 +77,7 @@ namespace WebApiSegura.Controllers
                         tarjeta.Nombre = sqlDataReader.GetString(4);
                         tarjeta.Predeterminado = sqlDataReader.GetString(5);
 
-                        cuentas.Add(tarjeta);
+                        tarjetas.Add(tarjeta);
                     }
                     sqlConnection.Close();
                 }
@@ -86,7 +86,7 @@ namespace WebApiSegura.Controllers
             {
                 return InternalServerError(ex);
             }
-            return Ok(cuentas);
+            return Ok(tarjetas);
         }
 
 

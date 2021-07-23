@@ -24,40 +24,40 @@ namespace AppPagoBus.Controllers
             return httpClient;
         }
 
-        public async Task<TarjetaModel> GetId(string token, string codigo)
+        public async Task<Tarjeta> GetId(string token, string codigo)
         {
             HttpClient httpClient = GetClient(token);
 
             var response = await httpClient.GetStringAsync(string.Concat(UrlBase, codigo));
 
-            return JsonConvert.DeserializeObject<TarjetaModel>(response);
+            return JsonConvert.DeserializeObject <Tarjeta>(response);
         }
 
-        public async Task<IEnumerable<TarjetaModel>> GetAll(string token)
+        public async Task<IEnumerable<Tarjeta>> GetAll(string token)
         {
             HttpClient httpClient = GetClient(token);
 
             var response = await httpClient.GetStringAsync(UrlBase);
 
-            return JsonConvert.DeserializeObject<IEnumerable<TarjetaModel>>(response);
+            return JsonConvert.DeserializeObject<IEnumerable<Tarjeta>>(response);
         }
 
-        public async Task<TarjetaModel> Ingresar(TarjetaModel tarjeta, string token)
+        public async Task<Tarjeta> Ingresar(Tarjeta tarjeta, string token)
         {
             HttpClient httpClient = GetClient(token);
 
             var response = await httpClient.PostAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(tarjeta), Encoding.UTF8, "application/jon"));
 
-            return JsonConvert.DeserializeObject<TarjetaModel>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<Tarjeta>(await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<TarjetaModel> Actualizar(TarjetaModel tarjeta, string token)
+        public async Task<Tarjeta> Actualizar(Tarjeta tarjeta, string token)
         {
             HttpClient httpClient = GetClient(token);
 
             var response = await httpClient.PutAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(tarjeta), Encoding.UTF8, "application/json"));
 
-            return JsonConvert.DeserializeObject<TarjetaModel>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<Tarjeta>(await response.Content.ReadAsStringAsync());
         }
 
         public async Task<string> Eliminar(string token, string id)

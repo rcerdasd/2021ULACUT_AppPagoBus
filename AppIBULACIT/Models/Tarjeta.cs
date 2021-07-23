@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AppPagoBus.Models
 {
-    public class TarjetaModel
+    public class Tarjeta
     {
         public int Codigo { get; set; }
         public int Numero { get; set; }

@@ -93,8 +93,6 @@
                         <tr>
                             <td>
                                 <asp:Literal ID="ltrProvincia" Text="Provincia" runat="server" /></td>
-                                                        <td>
-                                <asp:TextBox ID="txtProvincia" runat="server" CssClass="form-control" /></td>
                             <td>
                                 <asp:DropDownList OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged" ID="ddlProvincia" CssClass="form-control" runat="server">
                                     <asp:ListItem Value="San Jose">San Jose</asp:ListItem>
@@ -105,7 +103,6 @@
                                     <asp:ListItem Value="Limon">Limon</asp:ListItem>
                                     <asp:ListItem Value="Heredia">Heredia</asp:ListItem>
                                 </asp:DropDownList>
-
                             </td>
                         </tr>
                     </table>
