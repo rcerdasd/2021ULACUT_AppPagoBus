@@ -155,6 +155,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CustomErrors\frmError.aspx" />
+    <Content Include="CustomErrors\frmUsuarioDeshabilitado.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -244,6 +245,13 @@
     </Compile>
     <Compile Include="CustomErrors\frmError.aspx.designer.cs">
       <DependentUpon>frmError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomErrors\frmUsuarioDeshabilitado.aspx.cs">
+      <DependentUpon>frmUsuarioDeshabilitado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomErrors\frmUsuarioDeshabilitado.aspx.designer.cs">
+      <DependentUpon>frmUsuarioDeshabilitado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
