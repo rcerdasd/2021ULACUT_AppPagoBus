@@ -21,7 +21,7 @@ namespace AppPagoBus
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //inicializarHeaderTools();
+            inicializarHeaderTools();
         }
 
         protected void lnkCerrarSesion_Click(object sender, EventArgs e)

@@ -74,8 +74,8 @@ namespace WebApiSegura.Controllers
                     {
                         Tarjeta tarjeta = new Tarjeta();
                         tarjeta.Codigo = sqlDataReader.GetInt32(0);
-                        tarjeta.Numero = sqlDataReader.GetDecimal(1);
-                        tarjeta.CCV = sqlDataReader.GetDecimal(2);
+                        tarjeta.Numero = sqlDataReader.GetString(1);
+                        tarjeta.CCV = sqlDataReader.GetString(2);
                         tarjeta.FechaExpiracion = sqlDataReader.GetDateTime(3);
                         tarjeta.Nombre = sqlDataReader.GetString(4);
                         tarjeta.Predeterminado = sqlDataReader.GetString(5);
@@ -160,6 +160,7 @@ namespace WebApiSegura.Controllers
                     sqlCommand.Parameters.AddWithValue("@Nombre", tarjeta.Nombre);
                     sqlCommand.Parameters.AddWithValue("@Predeterminado", tarjeta.Predeterminado);
                     sqlCommand.Parameters.AddWithValue("@CodigoCliente", tarjeta.CodigoCliente);
+                    sqlCommand.Parameters.AddWithValue("@Codigo", tarjeta.Codigo);
 
                     sqlConnection.Open();
 

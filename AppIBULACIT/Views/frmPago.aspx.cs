@@ -82,6 +82,7 @@ namespace AppIBULACIT.Views
 
             try
             {
+                txtCodigoMant.Text = string.Empty;
                 limpiarlblResultado();
                 abrirMant();
             }
@@ -121,6 +122,7 @@ namespace AppIBULACIT.Views
         protected void btnCancelarModal_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseModal(); });", true);
+            InicializarControles();
         }
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)

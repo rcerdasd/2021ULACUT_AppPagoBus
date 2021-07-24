@@ -13,10 +13,10 @@ namespace WebApiSegura.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ULACIT2021_PAGO_ELECTRONICO_BUSESEntities : DbContext
+    public partial class ULACIT2021_PAGO_ELECTRONICO_BUSESEntities1 : DbContext
     {
-        public ULACIT2021_PAGO_ELECTRONICO_BUSESEntities()
-            : base("name=ULACIT2021_PAGO_ELECTRONICO_BUSESEntities")
+        public ULACIT2021_PAGO_ELECTRONICO_BUSESEntities1()
+            : base("name=ULACIT2021_PAGO_ELECTRONICO_BUSESEntities1")
         {
         }
     
@@ -27,9 +27,9 @@ namespace WebApiSegura.Models
     
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Ruta> Ruta { get; set; }
+        public virtual DbSet<RutaChofer> RutaChofer { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tarjeta> Tarjeta { get; set; }
         public virtual DbSet<Transaccion> Transaccion { get; set; }
-        public virtual DbSet<RutaChofer> RutaChofer { get; set; }
     }
 }

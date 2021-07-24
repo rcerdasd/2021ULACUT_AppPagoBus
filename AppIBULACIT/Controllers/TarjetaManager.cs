@@ -55,7 +55,7 @@ namespace AppPagoBus.Controllers
         {
             HttpClient httpClient = GetClient(token);
 
-            var response = await httpClient.PostAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(tarjeta), Encoding.UTF8, "application/jon"));
+            var response = await httpClient.PostAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(tarjeta), Encoding.UTF8, "application/json"));
 
             return JsonConvert.DeserializeObject<TarjetaModel>(await response.Content.ReadAsStringAsync());
         }

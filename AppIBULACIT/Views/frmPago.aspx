@@ -27,7 +27,8 @@
             });
         });
     </script>
-    <h1><asp:Label Text="Tarjetas" runat="server"></asp:Label></h1>
+    <h1>
+        <asp:Label Text="Tarjetas" runat="server"></asp:Label></h1>
     <input id="myInput" placeholder="Buscar" class="from-control" type="text" />
     <asp:GridView ID="gvTarjetas" OnRowCommand="gvTarjetas_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
         <Columns>
@@ -54,7 +55,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        <asp:Literal ID="ltrModalMensaje" runat="server" /><asp:Label ID="lblCodigoEliminar" runat="server"></asp:Label>
+                        <asp:Literal ID="ltrModalMensaje" runat="server" /><asp:Label ID="lblCodigoEliminar" Visible="false" runat="server"></asp:Label>
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -106,6 +107,9 @@
                                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" /></td>
                         </tr>
                         <tr>
+                            <td>
+                                <asp:Literal ID="ltrPredeterminado" Text="Predeterminado" runat="server" /></td>
+
                             <td>
                                 <asp:DropDownList ID="ddlPredeterminado" CssClass="form-control" runat="server">
                                     <asp:ListItem Value="1">Si</asp:ListItem>

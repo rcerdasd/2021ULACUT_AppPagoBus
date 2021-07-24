@@ -17,9 +17,9 @@ namespace WebApiSegura.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Persona()
         {
-            this.Transaccion = new HashSet<Transaccion>();
             this.RutaChofer = new HashSet<RutaChofer>();
             this.Tarjeta = new HashSet<Tarjeta>();
+            this.Transaccion = new HashSet<Transaccion>();
         }
     
         public int Codigo { get; set; }
@@ -33,12 +33,13 @@ namespace WebApiSegura.Models
         public string Tipo { get; set; }
         public decimal Saldo { get; set; }
         public string Estado { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transaccion> Transaccion { get; set; }
+        public string Token { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RutaChofer> RutaChofer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tarjeta> Tarjeta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaccion> Transaccion { get; set; }
     }
 }
