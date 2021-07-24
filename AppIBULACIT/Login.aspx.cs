@@ -33,19 +33,28 @@ namespace AppPagoBus
 
                         if (persona != null)
                         {
-                            JwtSecurityToken jwtSecurityToken;
-                            var jwtHandler = new JwtSecurityTokenHandler();
-                            jwtSecurityToken = jwtHandler.ReadJwtToken(persona.Token);
+                            if (persona.Tipo.ToString().Equals("1") || persona.Tipo.ToString().Equals("2") || persona.Tipo.ToString().Equals("3"))
+                            {
+                                JwtSecurityToken jwtSecurityToken;
+                                var jwtHandler = new JwtSecurityTokenHandler();
+                                jwtSecurityToken = jwtHandler.ReadJwtToken(persona.Token);
 
-                            Session["CodigoUsuario"] = persona.Codigo;
-                            Session["Identificacion"] = persona.Identificacion;
-                            Session["Nombre"] = persona.Nombre;
-                            Session["Email"] = persona.Email;
-                            Session["Saldo"] = persona.Saldo;
-                            Session["Token"] = persona.Token;
-                            Session["Tipo"] = persona.Tipo;
+                                Session["CodigoUsuario"] = persona.Codigo;
+                                Session["Identificacion"] = persona.Identificacion;
+                                Session["Nombre"] = persona.Nombre;
+                                Session["Email"] = persona.Email;
+                                Session["Saldo"] = persona.Saldo;
+                                Session["Token"] = persona.Token;
+                                Session["Tipo"] = persona.Tipo;
 
-                            FormsAuthentication.RedirectFromLoginPage(persona.Usuario, false);
+                                FormsAuthentication.RedirectFromLoginPage(persona.Usuario, false);
+                                
+                            }
+                            else
+                            {
+                                Response.Redirect("~/CustomErrors/frmUsuarioDeshabilitado.aspx");
+                            }
+
 
                         }
                         else

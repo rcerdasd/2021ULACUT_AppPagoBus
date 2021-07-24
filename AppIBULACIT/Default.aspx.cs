@@ -33,6 +33,26 @@ namespace AppPagoBus
             {
                 Response.Redirect("~/ChoferPage.aspx");
             }
+            
+             inicializarSaldo();
+        }
+
+        protected void inicializarSaldo()
+        {
+            try
+            {
+                string tipoUsuario = Session["Tipo"].ToString();
+                if (tipoUsuario.Equals("1"))
+                {
+                    lblSaldoCliente.Text = "Tu saldo es de ₡" + Session["Saldo"].ToString();
+                    lblSaldoCliente.Visible = true;
+                }
+            }
+            catch (Exception)
+            {
+                lblSaldoCliente.Text = "No se pudo cargar el saldo";
+                lblSaldoCliente.Visible = true;
+            }
 
         }
     }
