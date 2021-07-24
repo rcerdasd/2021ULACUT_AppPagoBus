@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\2021ImplementacionSistemas\AppPagoBus\WebApiSegura\Models\ModelPagoBus.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\ULACIT2021C2ImplementacionSistemas\Proyecto\2021ULACUT_AppPagoBus\WebApiSegura\Models\ModelPagoBus.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

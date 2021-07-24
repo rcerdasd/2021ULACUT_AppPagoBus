@@ -208,6 +208,7 @@
     <Content Include="Views\FrmAdmin.aspx" />
     <Content Include="Views\frmChofer.aspx" />
     <Content Include="Views\frmCliente.aspx" />
+    <Content Include="Views\frmPago.aspx" />
     <Content Include="Views\frmRuta.aspx" />
     <Content Include="Views\frmTarjeta.aspx" />
     <Content Include="Web.config" />
@@ -350,6 +351,13 @@
     </Compile>
     <Compile Include="Views\frmCliente.aspx.designer.cs">
       <DependentUpon>frmCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmPago.aspx.cs">
+      <DependentUpon>frmPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmPago.aspx.designer.cs">
+      <DependentUpon>frmPago.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmRuta.aspx.cs">
       <DependentUpon>frmRuta.aspx</DependentUpon>

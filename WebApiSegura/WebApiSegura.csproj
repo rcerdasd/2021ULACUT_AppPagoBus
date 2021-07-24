@@ -200,9 +200,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClienteTarjeta.cs">
-      <DependentUpon>ModelPagoBus.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\ModelPagoBus.Context.cs">
       <AutoGen>True</AutoGen>

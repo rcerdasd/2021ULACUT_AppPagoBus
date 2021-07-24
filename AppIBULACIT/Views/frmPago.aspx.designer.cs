@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppPagoBus.Views
+namespace AppIBULACIT.Views
 {
 
 
-    public partial class frmTarjeta
+    public partial class frmPago
     {
 
         /// <summary>
-        /// gvTarjeta control.
+        /// gvTarjetas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTarjeta;
+        protected global::System.Web.UI.WebControls.GridView gvTarjetas;
 
         /// <summary>
         /// btnNuevo control.
@@ -87,22 +87,22 @@ namespace AppPagoBus.Views
         protected global::System.Web.UI.WebControls.Literal ltrTituloMantenimiento;
 
         /// <summary>
-        /// ltrCodigo control.
+        /// ltrCodigoMant control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrCodigo;
+        protected global::System.Web.UI.WebControls.Literal ltrCodigoMant;
 
         /// <summary>
-        /// txtCodigo control.
+        /// txtCodigoMant control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
+        protected global::System.Web.UI.WebControls.TextBox txtCodigoMant;
 
         /// <summary>
         /// ltrNumero control.
@@ -123,22 +123,22 @@ namespace AppPagoBus.Views
         protected global::System.Web.UI.WebControls.TextBox txtNumero;
 
         /// <summary>
-        /// ltrccv control.
+        /// ltrCcv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrccv;
+        protected global::System.Web.UI.WebControls.Literal ltrCcv;
 
         /// <summary>
-        /// txtccv control.
+        /// txtCcv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtccv;
+        protected global::System.Web.UI.WebControls.TextBox txtCcv;
 
         /// <summary>
         /// ltrFechaExpiracion control.
@@ -175,24 +175,6 @@ namespace AppPagoBus.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
-
-        /// <summary>
-        /// ltrPredeterminado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrPredeterminado;
-
-        /// <summary>
-        /// txtPredeterminado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPredeterminado;
 
         /// <summary>
         /// ddlPredeterminado control.

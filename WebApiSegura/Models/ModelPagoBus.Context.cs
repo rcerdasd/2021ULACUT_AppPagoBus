@@ -25,7 +25,6 @@ namespace WebApiSegura.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ClienteTarjeta> ClienteTarjeta { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Ruta> Ruta { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

@@ -17,17 +17,16 @@ namespace WebApiSegura.Controllers
         [HttpGet]
         public IHttpActionResult GetId(int id)
         {
-            Tarjeta tarjeta = new Tarjeta();
+            List<Tarjeta> cuentas = new List<Tarjeta>();
             try
             {
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Numero, CCV, FechaExpiracion, Nombre, Predeterminado
-                                                             FROM   Tarjeta
-                                                             WHERE Codigo = @Codigo", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Numero, CCV, FechaExpiracion, Nombre, 
+                    Predeterminado, CodigoCliente FROM Tarjeta WHERE CodigoCliente = @CodigoCliente", sqlConnection);
 
-                    sqlCommand.Parameters.AddWithValue("@Codigo", id);
+                    sqlCommand.Parameters.AddWithValue("@CodigoCliente", id);
 
                     sqlConnection.Open();
 
@@ -35,14 +34,16 @@ namespace WebApiSegura.Controllers
 
                     while (sqlDataReader.Read())
                     {
+                        Tarjeta tarjeta = new Tarjeta();
                         tarjeta.Codigo = sqlDataReader.GetInt32(0);
-                        tarjeta.Numero = sqlDataReader.GetDecimal(1);
-                        tarjeta.CCV = sqlDataReader.GetDecimal(2);
+                        tarjeta.Numero = sqlDataReader.GetString(1);
+                        tarjeta.CCV = sqlDataReader.GetString(2);
                         tarjeta.FechaExpiracion = sqlDataReader.GetDateTime(3);
                         tarjeta.Nombre = sqlDataReader.GetString(4);
                         tarjeta.Predeterminado = sqlDataReader.GetString(5);
-                    }
 
+                        cuentas.Add(tarjeta);
+                    }
                     sqlConnection.Close();
                 }
             }
@@ -50,8 +51,7 @@ namespace WebApiSegura.Controllers
             {
                 return InternalServerError(ex);
             }
-
-            return Ok(tarjeta);
+            return Ok(cuentas);
         }
 
         [HttpGet]
@@ -64,7 +64,8 @@ namespace WebApiSegura.Controllers
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Numero, CCV, FechaExpiracion, Nombre, 
-                    Predeterminado FROM Tarjeta", sqlConnection);
+                    Predeterminado, CodigoCliente FROM Tarjeta", sqlConnection);
+                    
                     sqlConnection.Open();
 
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -104,8 +105,8 @@ namespace WebApiSegura.Controllers
                     new SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
                     SqlCommand sqlCommand =
-                        new SqlCommand(@"INSERT INTO Tarjeta (Numero, CCV, FechaExpiracion, Nombre, Predeterminado) 
-                                         VALUES (@Numero, @CCV, @FechaExpiracion, @Nombre, @Predeterminado)",
+                        new SqlCommand(@"INSERT INTO Tarjeta (Numero, CCV, FechaExpiracion, Nombre, Predeterminado, CodigoCliente) 
+                                         VALUES (@Numero, @CCV, @FechaExpiracion, @Nombre, @Predeterminado, @CodigoCliente)",
                                          sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Numero", tarjeta.Numero);
@@ -113,6 +114,8 @@ namespace WebApiSegura.Controllers
                     sqlCommand.Parameters.AddWithValue("@FechaExpiracion", tarjeta.FechaExpiracion);
                     sqlCommand.Parameters.AddWithValue("@Nombre", tarjeta.Nombre);
                     sqlCommand.Parameters.AddWithValue("@Predeterminado", tarjeta.Predeterminado);
+                    sqlCommand.Parameters.AddWithValue("@CodigoCliente", tarjeta.CodigoCliente);
+
 
                     sqlConnection.Open();
 
@@ -147,6 +150,7 @@ namespace WebApiSegura.Controllers
                                                             FechaExpiracion = @FechaExpiracion,
                                                             Nombre = @Nombre,
                                                             Predeterminado = @Predeterminado,
+                                                            CodigoCliente = @CodigoCliente
                                           WHERE Codigo = @Codigo",
                                          sqlConnection);
 
@@ -155,6 +159,7 @@ namespace WebApiSegura.Controllers
                     sqlCommand.Parameters.AddWithValue("@FechaExpiracion", tarjeta.FechaExpiracion);
                     sqlCommand.Parameters.AddWithValue("@Nombre", tarjeta.Nombre);
                     sqlCommand.Parameters.AddWithValue("@Predeterminado", tarjeta.Predeterminado);
+                    sqlCommand.Parameters.AddWithValue("@CodigoCliente", tarjeta.CodigoCliente);
 
                     sqlConnection.Open();
 

@@ -1,30 +1,29 @@
-﻿using System;
+﻿using AppPagoBus.Controllers;
+using AppPagoBus.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AppIBULACIT.Controllers;
-using AppPagoBus.Models;
-using System.Collections.ObjectModel;
-using System.Drawing;
-using AppPagoBus.Controllers;
 
-namespace AppPagoBus.Views
+namespace AppIBULACIT.Views
 {
-    public partial class frmTarjeta : System.Web.UI.Page
+    public partial class frmPago : System.Web.UI.Page
     {
+
         IEnumerable<TarjetaModel> tarjetaList = new ObservableCollection<TarjetaModel>();
         TarjetaManager tarjetaManager = new TarjetaManager();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Token"] == null)
+            if (!IsPostBack)
             {
-                Response.Redirect("../Login.aspx");
-            }
-            else
-            {
-                InicializarControles();
+                if (Session["CodigoUsuario"] == null)
+                    Response.Redirect("~/Login.aspx");
+                else
+                    InicializarControles();
             }
         }
 
@@ -33,13 +32,13 @@ namespace AppPagoBus.Views
             try
             {
                 tarjetaList = await tarjetaManager.GetAll(Session["Token"].ToString());
-                gvTarjeta.DataSource = tarjetaList.ToList();
-                gvTarjeta.DataBind();
+                gvTarjetas.DataSource = tarjetaList.ToList();
+                gvTarjetas.DataBind();
             }
             catch (Exception e)
             {
 
-                lblStatus.Text = "Hubo un error al cargar la lista de chofer. Error: " + e.Message;
+                lblStatus.Text = "Hubo un error al cargar la lista de tarjetas. Error: " + e.Message;
             }
         }
 
@@ -49,29 +48,28 @@ namespace AppPagoBus.Views
             lblResultado.Text = string.Empty;
         }
 
-        protected void gvChofer_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvTarjetas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gvTarjeta.Rows[index];
+            GridViewRow row = gvTarjetas.Rows[index];
             switch (e.CommandName)
             {
                 case "Modificar":
                     limpiarlblResultado();
-                    ltrTituloMantenimiento.Text = "Mantenimiento chofer";
+                    ltrTituloMantenimiento.Text = "Mantenimiento tarjetas";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
-                    txtCodigo.Text = row.Cells[0].Text.Trim();
+                    txtCodigoMant.Text = row.Cells[0].Text.Trim();
                     txtNumero.Text = row.Cells[1].Text.Trim();
-                    txtccv.Text = row.Cells[2].Text.Trim();
+                    txtCcv.Text = row.Cells[2].Text.Trim();
                     txtFechaExpiracion.Text = row.Cells[3].Text.Trim();
                     txtNombre.Text = row.Cells[4].Text.Trim();
-                    txtPredeterminado.Text = row.Cells[5].Text.Trim();
-
+                    ddlPredeterminado.SelectedValue = row.Cells[5].Text.Trim();
                     btnAceptarMant.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
                     break;
                 case "Eliminar":
                     lblCodigoEliminar.Text = row.Cells[0].Text.Trim();
-                    ltrModalMensaje.Text = "Esta seguro que desea eliminar el chofer " + lblCodigoEliminar.Text + "?";
+                    ltrModalMensaje.Text = "Esta seguro que desea eliminar el servicio " + lblCodigoEliminar.Text + "?";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModal(); });", true);
                     break;
                 default:
@@ -101,18 +99,9 @@ namespace AppPagoBus.Views
             ltrTituloMantenimiento.Text = "Nueva tarjeta";
             btnAceptarMant.ControlStyle.CssClass = "btn btn-sucess";
             btnAceptarMant.Visible = true;
-            ltrCodigo.Visible = true;
-            txtCodigo.Visible = true;
-            ltrNumero.Visible = true;
-            txtNumero.Visible = true;
-            ltrccv.Visible = true;
-            txtccv.Visible = true;
-            ltrFechaExpiracion.Visible = true;
-            txtFechaExpiracion.Visible = true;
-            ltrNombre.Visible = true;
-            txtNombre.Visible = true;
-            ltrPredeterminado.Visible = true;
-            txtPredeterminado.Visible = true;
+            ltrCodigoMant.Visible = true;
+            txtCodigoMant.Visible = true;
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
         }
 
@@ -123,7 +112,7 @@ namespace AppPagoBus.Views
             if (!string.IsNullOrEmpty(resultado))
             {
                 lblCodigoEliminar.Text = string.Empty;
-                ltrModalMensaje.Text = "Tarjeta eliminada";
+                ltrModalMensaje.Text = "TarjetaModel eliminada";
                 btnAceptarModal.Visible = false;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModal();})", true);
             }
@@ -133,24 +122,26 @@ namespace AppPagoBus.Views
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseModal(); });", true);
         }
+
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(txtCodigo.Text))
+                if (string.IsNullOrEmpty(txtCodigoMant.Text))
                 {
-                    TarjetaModel tarj = new TarjetaModel()
+                    TarjetaModel tarjeta = new TarjetaModel()
                     {
-                        Numero = Convert.ToInt32(txtNumero.Text),
-                        CCV = Convert.ToInt32(txtccv.Text),
+                        Numero = txtNumero.Text,
+                        CCV = txtCcv.Text,
                         FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
                         Nombre = txtNombre.Text,
-                        Predeterminado = txtPredeterminado.Text
+                        Predeterminado = ddlPredeterminado.SelectedValue,
+                        CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())
                     };
 
-                    TarjetaModel tarjetaIngresado = await tarjetaManager.Ingresar(tarj, Session["Token"].ToString());
+                    TarjetaModel tarjetaIngresada = await tarjetaManager.Ingresar(tarjeta, Session["Token"].ToString());
 
-                    if (!string.IsNullOrEmpty(tarjetaIngresado.Numero.ToString()))
+                    if (!string.IsNullOrEmpty(tarjetaIngresada.Nombre))
                     {
                         lblResultado.Text = "Tarjeta ingresada con exito";
                         lblResultado.ForeColor = Color.Green;
@@ -166,22 +157,25 @@ namespace AppPagoBus.Views
                         abrirMant();
                     }
                 }
-                else
+                else//Modificar
                 {
-                    TarjetaModel chofer = new TarjetaModel()
+                    TarjetaModel tarjeta = new TarjetaModel()
                     {
-                        Numero = Convert.ToInt32(txtNumero.Text),
-                        CCV = Convert.ToInt32(txtccv.Text),
+                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                        Numero = txtNumero.Text,
+                        CCV = txtCcv.Text,
                         FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
                         Nombre = txtNombre.Text,
-                        Predeterminado = txtPredeterminado.Text
+                        Predeterminado = ddlPredeterminado.SelectedValue,
+                        CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())
+
                     };
 
-                    TarjetaModel choferModificado = await tarjetaManager.Actualizar(chofer, Session["Token"].ToString());
+                    TarjetaModel tarjetaModificada = await tarjetaManager.Actualizar(tarjeta, Session["Token"].ToString());
 
-                    if (!string.IsNullOrEmpty(choferModificado.Numero.ToString()))
+                    if (!string.IsNullOrEmpty(tarjetaModificada.Nombre))
                     {
-                        lblResultado.Text = "Tarjeta modificada con exito";
+                        lblResultado.Text = "TarjetaModel modificada con exito";
                         lblResultado.ForeColor = Color.Green;
                         lblResultado.Visible = true;
                         btnAceptarMant.Visible = false;
@@ -209,5 +203,6 @@ namespace AppPagoBus.Views
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {​​​ CloseMantenimiento(); }​​​);", true);
         }
+
     }
 }

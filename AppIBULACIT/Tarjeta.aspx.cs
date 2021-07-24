@@ -27,7 +27,7 @@ namespace AppPagoBus
                     TarjetaModel tarjeta = new TarjetaModel()
                     {
                        Numero = Convert.ToInt32(txtNumero.Text),
-                       ccv = Convert.ToInt32(txtNumero.Text),
+                       CCV = Convert.ToInt32(txtNumero.Text),
                        FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
                        Nombre = txtNombre.Text,
                        Predeterminado = txtNumero.Text

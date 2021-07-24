@@ -1,19 +1,23 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="frmTarjeta.aspx.cs" Inherits="AppPagoBus.Views.frmTarjeta" %>
+﻿<%@ Page Title="" Async="true" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPago.aspx.cs" Inherits="AppIBULACIT.Views.frmPago" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         function openModal() {
             $('#myModal').modal('show');
         }
+
         function openModalMantenimiento() {
             $('#myModalMantenimiento').modal('show');
         }
+
         function CloseModal() {
             $('#myModal').modal('hide');
         }
+
         function CloseMantenimiento() {
             $('#myModalMantenimiento').modal('hide');
         }
+
         $(document).ready(function () {
             $("#myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
@@ -23,18 +27,16 @@
             });
         });
     </script>
-    <h1>
-        <asp:Label Text="Tarjeta" runat="server"></asp:Label></h1>
+    <h1><asp:Label Text="Tarjetas" runat="server"></asp:Label></h1>
     <input id="myInput" placeholder="Buscar" class="from-control" type="text" />
-    <asp:GridView ID="gvTarjeta" OnRowCommand="gvTarjeta_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
+    <asp:GridView ID="gvTarjetas" OnRowCommand="gvTarjetas_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
         <Columns>
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="Numero" DataField="Numero" />
-            <asp:BoundField HeaderText="CCV" DataField="CCV" />
+            <asp:BoundField HeaderText="CCV" DataField="CCV" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
             <asp:BoundField HeaderText="FechaExpiracion" DataField="FechaExpiracion" />
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Predeterminado" DataField="Predeterminado" />
-
             <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
             <asp:ButtonField HeaderText="Eliminar" CommandName="Eliminar" ControlStyle-CssClass="btn btn-danger" ButtonType="Button" Text="Eliminar" />
         </Columns>
@@ -48,7 +50,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Mis tarjetas</h4>
+                    <h4 class="modal-title">Mantenimiento de tarjetas</h4>
                 </div>
                 <div class="modal-body">
                     <p>
@@ -75,9 +77,9 @@
                     <table style="width: 100%;">
                         <tr>
                             <td>
-                                <asp:Literal ID="ltrCodigo" Text="Codigo" runat="server" /></td>
+                                <asp:Literal ID="ltrCodigoMant" Text="Codigo" runat="server" /></td>
                             <td>
-                                <asp:TextBox ID="txtCodigo" runat="server" Enabled="false" CssClass="form-control" /></td>
+                                <asp:TextBox ID="txtCodigoMant" runat="server" Enabled="false" CssClass="form-control" /></td>
                         </tr>
                         <tr>
                             <td>
@@ -87,13 +89,13 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Literal ID="ltrccv" Text="CCV" runat="server" /></td>
+                                <asp:Literal ID="ltrCcv" Text="CCV" runat="server" /></td>
                             <td>
-                                <asp:TextBox ID="txtccv" runat="server" CssClass="form-control" /></td>
+                                <asp:TextBox ID="txtCcv" runat="server" CssClass="form-control" /></td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Literal ID="ltrFechaExpiracion" Text="Fecha de Expiracion" runat="server" /></td>
+                                <asp:Literal ID="ltrFechaExpiracion" Text="FechaExpiracion" runat="server" /></td>
                             <td>
                                 <asp:TextBox ID="txtFechaExpiracion" runat="server" CssClass="form-control" /></td>
                         </tr>
@@ -105,11 +107,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Literal ID="ltrPredeterminado" Text="Predeterminado" runat="server" /></td>
-                            <td>
-                                <asp:TextBox ID="txtPredeterminado" runat="server" CssClass="form-control" />
-                                <asp:DropDownList OnSelectedIndexChanged="ddlPredeterminado_SelectedIndexChanged" ID="ddlPredeterminado" CssClass="form-control" runat="server">
-                                    <asp:ListItem Value="1">Sí</asp:ListItem>
+                                <asp:DropDownList ID="ddlPredeterminado" CssClass="form-control" runat="server">
+                                    <asp:ListItem Value="1">Si</asp:ListItem>
                                     <asp:ListItem Value="0">No</asp:ListItem>
                                 </asp:DropDownList>
 
@@ -126,4 +125,3 @@
         </div>
     </div>
 </asp:Content>
-<%--  --%>
