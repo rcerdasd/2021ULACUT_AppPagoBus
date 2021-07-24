@@ -204,6 +204,7 @@
     <Content Include="Tarjeta.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Views\frmChofer.aspx" />
+    <Content Include="Views\frmCliente.aspx" />
     <Content Include="Views\frmRuta.aspx" />
     <Content Include="Views\frmTarjeta.aspx" />
     <Content Include="Web.config" />
@@ -239,6 +240,7 @@
     <Compile Include="Controllers\PersonaManager.cs" />
     <Compile Include="Controllers\RutaManager.cs" />
     <Compile Include="Controllers\TarjetaManager.cs" />
+    <Compile Include="Controllers\UsuarioManager.cs" />
     <Compile Include="CustomErrors\frmError.aspx.cs">
       <DependentUpon>frmError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,6 +318,13 @@
     </Compile>
     <Compile Include="Views\frmChofer.aspx.designer.cs">
       <DependentUpon>frmChofer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmCliente.aspx.cs">
+      <DependentUpon>frmCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmCliente.aspx.designer.cs">
+      <DependentUpon>frmCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmRuta.aspx.cs">
       <DependentUpon>frmRuta.aspx</DependentUpon>

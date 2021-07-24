@@ -29,7 +29,7 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = 
                     new SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Nombre, Apellido, Identificacion, FechaNacimiento, Usuario, Contrasena, Email, Tipo, Saldo FROM Persona Where Usuario = @Usuario and Contrasena = @Contrasena ", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Nombre, Apellido, Identificacion, FechaNacimiento, Usuario, Contrasena, Email, Tipo, Saldo, Estado FROM Persona Where Usuario = @Usuario and Contrasena = @Contrasena ", sqlConnection);
                     
                     sqlCommand.Parameters.AddWithValue("@Usuario", loginRequest.Username);
                     sqlCommand.Parameters.AddWithValue("@Contrasena", loginRequest.Password);
@@ -50,6 +50,7 @@ namespace WebApiSegura.Controllers
                         persona.Email = sqlDataReader.GetString(7);
                         persona.Tipo = sqlDataReader.GetString(8);
                         persona.Saldo = sqlDataReader.GetDecimal(9);
+                        persona.Estado = sqlDataReader.GetString(10);
 
                         var token = 
                             TokenGenerator.GenerateTokenJwt(persona.Identificacion);
@@ -83,7 +84,7 @@ namespace WebApiSegura.Controllers
                 using(SqlConnection sqlConnection = new 
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"INSERT INTO Persona (Nombre, Apellido, Identificacion, FechaNacimiento, Usuario, Contrasena, Email, Tipo, Saldo) VALUES (@Nombre, @Apellido, @Identificacion, @FechaNacimiento, @Usuario, @Contrasena, @Email, @Tipo, @Saldo)", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(@"INSERT INTO Persona (Nombre, Apellido, Identificacion, FechaNacimiento, Usuario, Contrasena, Email, Tipo, Saldo, Estado) VALUES (@Nombre, @Apellido, @Identificacion, @FechaNacimiento, @Usuario, @Contrasena, @Email, @Tipo, @Saldo, @Estado)", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Nombre",persona.Nombre);
                     sqlCommand.Parameters.AddWithValue("@Apellido", persona.Apellido);
@@ -94,6 +95,8 @@ namespace WebApiSegura.Controllers
                     sqlCommand.Parameters.AddWithValue("@Email", persona.Email);
                     sqlCommand.Parameters.AddWithValue("@Tipo", persona.Tipo);
                     sqlCommand.Parameters.AddWithValue("@Saldo", persona.Saldo);
+                    sqlCommand.Parameters.AddWithValue("@Estado", persona.Estado);
+
 
                     sqlConnection.Open();
 

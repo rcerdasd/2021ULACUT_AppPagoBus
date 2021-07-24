@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AppPagoBus.Views
+namespace AppIBULACIT.Views
 {
 
 
-    public partial class frmChofer
+    public partial class frmCliente
     {
 
         /// <summary>
-        /// gvChofer control.
+        /// gvPersona control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvChofer;
+        protected global::System.Web.UI.WebControls.GridView gvPersona;
 
         /// <summary>
         /// btnNuevo control.
@@ -229,6 +229,24 @@ namespace AppPagoBus.Views
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// ltrSaldo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrSaldo;
+
+        /// <summary>
+        /// txtSaldo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSaldo;
 
         /// <summary>
         /// ddlEstadoMant control.

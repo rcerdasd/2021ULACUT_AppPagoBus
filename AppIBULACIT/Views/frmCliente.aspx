@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="frmChofer.aspx.cs" Inherits="AppPagoBus.Views.frmChofer" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="frmCliente.aspx.cs" Inherits="AppIBULACIT.Views.frmCliente" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
  <script type="text/javascript">
         function openModal() {
@@ -24,9 +23,9 @@
         });
  </script>
     <h1>
-        <asp:Label Text="Chofer" runat="server"></asp:Label></h1>
+        <asp:Label Text="Persona" runat="server"></asp:Label></h1>
     <input id="myInput" Placeholder="Buscar" class="from-control" type="text"/>
-    <asp:GridView ID="gvChofer" OnRowCommand="gvChofer_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
+    <asp:GridView ID="gvPersona" OnRowCommand="gvPersona_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
         <Columns>
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -35,6 +34,7 @@
             <asp:BoundField HeaderText="Fecha Nacimiento" DataField="FechaNacimiento" />
             <asp:BoundField HeaderText="Usuario" DataField="Usuario" />
             <asp:BoundField HeaderText="Email" DataField="Email"/>
+            <asp:BoundField HeaderText="Saldo" DataField="Saldo"/>
                         <asp:BoundField HeaderText="Estado" DataField="Estado"/>
 
             <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
@@ -50,7 +50,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Mantenimiento de chofer</h4>
+                    <h4 class="modal-title">Mantenimiento de persona</h4>
                 </div>
                 <div class="modal-body">
                     <p>
@@ -122,7 +122,13 @@
                                                         <td>
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" /></td>
                         </tr>
-                        <tr>
+                                                <tr>
+                            <td>
+                                <asp:Literal ID="ltrSaldo" Text="Saldo" runat="server" /></td>
+                                                        <td>
+                                <asp:TextBox ID="txtSaldo" runat="server" CssClass="form-control" /></td>
+                        </tr>
+                         <tr>
                             <td>
                                 <asp:Literal Text="Estado" runat="server" /></td>
                             <td>

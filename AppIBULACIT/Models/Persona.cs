@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppPagoBus.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,13 @@ namespace AppPagoBus.Models
         public string Tipo { get; set; }
         public Nullable<decimal> Saldo { get; set; }
 
+        public string Estado { get; set; }
+
         public string Token { get; set; }
+
+        public static implicit operator Persona(PersonaManager v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

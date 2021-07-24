@@ -18,7 +18,17 @@ namespace AppIBULACIT.CustomErrors
             {
                 err = err.GetBaseException();
                 lblError.Text = err.Message;
+                lblError.Visible = true;
                 Session["LastError"] = null;
+            }
+            else if (Server.GetLastError()!=null)
+            {
+                err = Server.GetLastError();
+
+                lblError.Text = err.Message.ToString();
+                lblError.Visible = true;
+                Session["LastError"] = null;
+
             }
         }
     }

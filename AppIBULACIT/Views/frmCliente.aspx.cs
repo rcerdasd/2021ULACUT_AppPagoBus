@@ -9,12 +9,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AppPagoBus.Views
+namespace AppIBULACIT.Views
 {
-    public partial class frmChofer : System.Web.UI.Page
+    public partial class frmCliente : System.Web.UI.Page
     {
-        IEnumerable<Persona> choferList = new ObservableCollection<Persona>();
-        ChoferManager personaManager = new ChoferManager();
+
+        IEnumerable<Persona> personaList = new ObservableCollection<Persona>();
+        UsuarioManager personaManager = new UsuarioManager();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -33,14 +34,14 @@ namespace AppPagoBus.Views
         {
             try
             {
-                choferList = await personaManager.GetAll(Session["Token"].ToString());
-                gvChofer.DataSource = choferList.ToList();
-                gvChofer.DataBind();
+                personaList = await personaManager.GetAll(Session["Token"].ToString());
+                gvPersona.DataSource = personaList.ToList();
+                gvPersona.DataBind();
             }
             catch (Exception e)
             {
 
-                lblStatus.Text = "Hubo un error al cargar la lista de chofer. Error: " + e.Message;
+                lblStatus.Text = "Hubo un error al cargar la lista de persona. Error: " + e.Message;
             }
         }
 
@@ -50,15 +51,15 @@ namespace AppPagoBus.Views
             lblResultado.Text = string.Empty;
         }
 
-        protected void gvChofer_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvPersona_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gvChofer.Rows[index];
+            GridViewRow row = gvPersona.Rows[index];
             switch (e.CommandName)
             {
                 case "Modificar":
                     limpiarlblResultado();
-                    ltrTituloMantenimiento.Text = "Mantenimiento chofer";
+                    ltrTituloMantenimiento.Text = "Mantenimiento persona";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtCodigo.Text = row.Cells[0].Text.Trim();
                     txtNombre.Text = row.Cells[1].Text.Trim();
@@ -67,7 +68,8 @@ namespace AppPagoBus.Views
                     txtFechaNacimiento.Text = row.Cells[4].Text.Trim();
                     txtUsuario.Text = row.Cells[5].Text.Trim();
                     txtEmail.Text = row.Cells[6].Text.Trim();
-                    ddlEstadoMant.SelectedValue = row.Cells[7].Text.Trim().ToLower();
+                    txtSaldo.Text = row.Cells[7].Text.Trim();
+                    ddlEstadoMant.SelectedValue = row.Cells[8].Text.Trim().ToLower();
                     ltrContrasena.Visible = false;
                     txtContrasena.Visible = false;
 
@@ -76,7 +78,7 @@ namespace AppPagoBus.Views
                     break;
                 case "Eliminar":
                     lblCodigoEliminar.Text = row.Cells[0].Text.Trim();
-                    ltrModalMensaje.Text = "Esta seguro que desea eliminar el chofer " + lblCodigoEliminar.Text + "?";
+                    ltrModalMensaje.Text = "Esta seguro que desea eliminar el persona " + lblCodigoEliminar.Text + "?";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModal(); });", true);
                     break;
                 default:
@@ -104,7 +106,7 @@ namespace AppPagoBus.Views
 
         private void abrirMant()
         {
-            ltrTituloMantenimiento.Text = "Nuevo chofer";
+            ltrTituloMantenimiento.Text = "Nuevo persona";
             btnAceptarMant.ControlStyle.CssClass = "btn btn-sucess";
             btnAceptarMant.Visible = true;
             ltrCodigo.Visible = true;
@@ -135,7 +137,7 @@ namespace AppPagoBus.Views
             if (!string.IsNullOrEmpty(resultado))
             {
                 lblCodigoEliminar.Text = string.Empty;
-                ltrModalMensaje.Text = "Chofer eliminado";
+                ltrModalMensaje.Text = "Persona eliminado";
                 btnAceptarModal.Visible = false;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModal();})", true);
             }
@@ -153,7 +155,7 @@ namespace AppPagoBus.Views
             {
                 if (string.IsNullOrEmpty(txtCodigo.Text))
                 {
-                    Persona chofer = new Persona()
+                    Persona persona = new Persona()
                     {
                         Nombre = txtNombre.Text,
                         Apellido = txtApellido.Text,
@@ -162,15 +164,16 @@ namespace AppPagoBus.Views
                         Usuario = txtUsuario.Text,
                         Contrasena = txtContrasena.Text,
                         Email = txtEmail.Text,
-                        Tipo = "3",
+                        Tipo = "1",
+                        Saldo = Convert.ToDecimal(txtSaldo.Text),
                         Estado = ddlEstadoMant.SelectedValue
                     };
 
-                    Persona choferIngresado = await personaManager.Ingresar(chofer, Session["Token"].ToString());
+                    Persona personaIngresado = await personaManager.Ingresar(persona, Session["Token"].ToString());
 
-                    if (!string.IsNullOrEmpty(choferIngresado.Usuario))
+                    if (!string.IsNullOrEmpty(personaIngresado.Usuario))
                     {
-                        lblResultado.Text = "Chofer ingresado con exito";
+                        lblResultado.Text = "Persona ingresado con exito";
                         lblResultado.ForeColor = Color.Green;
                         lblResultado.Visible = true;
                         btnAceptarMant.Visible = false;
@@ -178,7 +181,7 @@ namespace AppPagoBus.Views
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al ingresar el chofer";
+                        lblResultado.Text = "Hubo un error al ingresar el persona";
                         lblResultado.ForeColor = Color.Maroon;
                         lblResultado.Visible = true;
                         abrirMant();
@@ -186,24 +189,25 @@ namespace AppPagoBus.Views
                 }
                 else
                 {
-                    Persona chofer = new Persona()
+                    Persona persona = new Persona()
                     {
                         Codigo = Convert.ToInt32(txtCodigo.Text),
                         Nombre = txtNombre.Text,
                         Apellido = txtApellido.Text,
                         Identificacion = txtIdentificacion.Text,
                         FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text),
-                        Usuario = txtUsuario.Text,                        
+                        Usuario = txtUsuario.Text,
                         Email = txtEmail.Text,
-                        Tipo = "3",
+                        Tipo = "1",
+                        Saldo = Convert.ToDecimal(txtSaldo.Text),
                         Estado = ddlEstadoMant.SelectedValue
                     };
 
-                    Persona choferModificado = await personaManager.Actualizar(chofer, Session["Token"].ToString());
+                    Persona personaModificado = await personaManager.Actualizar(persona, Session["Token"].ToString());
 
-                    if (!string.IsNullOrEmpty(choferModificado.Usuario))
+                    if (!string.IsNullOrEmpty(personaModificado.Usuario))
                     {
-                        lblResultado.Text = "Chofer modificado con exito";
+                        lblResultado.Text = "Persona modificado con exito";
                         lblResultado.ForeColor = Color.Green;
                         lblResultado.Visible = true;
                         btnAceptarMant.Visible = false;
@@ -211,7 +215,7 @@ namespace AppPagoBus.Views
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al modificar el chofer";
+                        lblResultado.Text = "Hubo un error al modificar el persona";
                         lblResultado.ForeColor = Color.Maroon;
                         lblResultado.Visible = true;
                     }
