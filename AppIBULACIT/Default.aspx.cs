@@ -22,7 +22,18 @@ namespace AppPagoBus
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["CodigoUsuario"] == null)
+            {
                 Response.Redirect("~/Login.aspx");
+
+            }else if(Session["Tipo"].ToString() == "1")
+            {
+                Response.Redirect("~/AdministratorPage.aspx");
+            }
+            else if (Session["Tipo"].ToString() == "3")
+            {
+                Response.Redirect("~/ChoferPage.aspx");
+            }
+
         }
     }
 }

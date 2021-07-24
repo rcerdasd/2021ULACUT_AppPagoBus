@@ -147,7 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AdministratorPage.aspx" />
     <Content Include="Chofer.aspx" />
+    <Content Include="ChoferPage.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -202,6 +204,7 @@
     <Content Include="Site.Master" />
     <Content Include="Tarjeta.aspx" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Views\FrmAdmin.aspx" />
     <Content Include="Views\frmChofer.aspx" />
     <Content Include="Views\frmRuta.aspx" />
     <Content Include="Views\frmTarjeta.aspx" />
@@ -211,6 +214,13 @@
     <Content Include="Views\web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministratorPage.aspx.cs">
+      <DependentUpon>AdministratorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministratorPage.aspx.designer.cs">
+      <DependentUpon>AdministratorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -227,6 +237,13 @@
     <Compile Include="Chofer.aspx.designer.cs">
       <DependentUpon>Chofer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ChoferPage.aspx.cs">
+      <DependentUpon>ChoferPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChoferPage.aspx.designer.cs">
+      <DependentUpon>ChoferPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -234,6 +251,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminManager.cs" />
     <Compile Include="Controllers\ChoferManager.cs" />
     <Compile Include="Controllers\PersonaManager.cs" />
     <Compile Include="Controllers\RutaManager.cs" />
@@ -301,6 +319,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FrmAdmin.aspx.cs">
+      <DependentUpon>FrmAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\FrmAdmin.aspx.designer.cs">
+      <DependentUpon>FrmAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmChofer.aspx.cs">
       <DependentUpon>frmChofer.aspx</DependentUpon>

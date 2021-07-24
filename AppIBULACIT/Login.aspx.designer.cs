@@ -10,7 +10,6 @@
 namespace AppPagoBus
 {
 
-
     public partial class Login
     {
 
