@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="frmTarjeta.aspx.cs" Inherits="AppPagoBus.Views.frmTarjeta" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master"  Async="true" AutoEventWireup="true" CodeBehind="FrmAdmin.aspx.cs" Inherits="AppIBULACIT.Views.FrmAdmin" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
  <script type="text/javascript">
@@ -24,17 +24,19 @@
         });
  </script>
     <h1>
-        <asp:Label Text="Tarjeta" runat="server"></asp:Label></h1>
+        <asp:Label Text="Administradores" runat="server"></asp:Label></h1>
     <input id="myInput" Placeholder="Buscar" class="from-control" type="text"/>
-    <asp:GridView ID="gvTarjeta" OnRowCommand="gvTarjeta_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
+    <asp:GridView ID="gvAdmin" OnRowCommand="gvAdmin_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
         <Columns>
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
-            <asp:BoundField HeaderText="Numero" DataField="Numero" />
-            <asp:BoundField HeaderText="ccv" DataField="ccv"/>
-            <asp:BoundField HeaderText="Fecha de Expiracion" DataField="FechaExpiracion" />
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-            <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-            <asp:ButtonField HeaderText="Predeterminado" CommandName="Predeterminado" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
+            <asp:BoundField HeaderText="Apellido" DataField="Apellido"/>
+            <asp:BoundField HeaderText="Identificacion" DataField="Identificacion" />
+            <asp:BoundField HeaderText="Fecha Nacimiento" DataField="FechaNacimiento" />
+            <asp:BoundField HeaderText="Usuario" DataField="Usuario" />
+            <asp:BoundField HeaderText="Contrasena" DataField="Contrasena" />
+            <asp:BoundField HeaderText="Email" DataField="Email"/>
+            <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
             <asp:ButtonField HeaderText="Eliminar" CommandName="Eliminar" ControlStyle-CssClass="btn btn-danger" ButtonType="Button" Text="Eliminar" />
         </Columns>
     </asp:GridView>
@@ -47,7 +49,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Mis tarjetas</h4>
+                    <h4 class="modal-title">Mantenimiento de administradores</h4>
                 </div>
                 <div class="modal-body">
                     <p>
@@ -79,39 +81,45 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Literal ID="ltrNumero" Text="Numero" runat="server" /></td>
-                            <td>
-                                <asp:TextBox ID="txtNumero" runat="server" CssClass="form-control" /></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Literal ID="ltrccv" Text="CCV" runat="server" /></td>
-                            <td>
-                                <asp:TextBox ID="txtccv" runat="server" CssClass="form-control" /></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Literal ID="ltrFechaExpiracion" Text="Fecha de Expiracion" runat="server" /></td>
-                                                        <td>
-                                <asp:TextBox ID="txtFechaExpiracion" runat="server" CssClass="form-control" /></td>
-                        </tr>
-                        <tr>
-                            <td>
                                 <asp:Literal ID="ltrNombre" Text="Nombre" runat="server" /></td>
-                                                        <td>
+                            <td>
                                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" /></td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Literal ID="ltrPredeterminado" Text="Predeterminado" runat="server" /></td>
+                                <asp:Literal ID="ltrApellido" Text="Apellido" runat="server" /></td>
+                            <td>
+                                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Literal ID="ltrIdentificacion" Text="Identificacion" runat="server" /></td>
                                                         <td>
-                                <asp:TextBox ID="txtPredeterminado" runat="server" CssClass="form-control" />
-                                <asp:DropDownList OnSelectedIndexChanged="ddlPredeterminado_SelectedIndexChanged" ID="ddlPredeterminado" CssClass="form-control" runat="server">
-                                    <asp:ListItem Value="1">Sí</asp:ListItem>
-                                    <asp:ListItem Value="0">No</asp:ListItem>
-                                </asp:DropDownList>
-
-                            </td>
+                                <asp:TextBox ID="txtIdentificacion" runat="server" CssClass="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Literal ID="ltrFechaNacimiento" Text="Fecha Nacimiento" runat="server" /></td>
+                                                        <td>
+                                <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Literal ID="ltrUsuario" Text="Usuario" runat="server" /></td>
+                                                        <td>
+                                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Literal ID="ltrContrasena" Text="Contraseña" runat="server" /></td>
+                                                        <td>
+                                <asp:TextBox ID="txtContrasena" runat="server" CssClass="form-control" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Literal ID="ltrEmail" Text="Email" runat="server" /></td>
+                                                        <td>
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" /></td>
                         </tr>
                     </table>
                     <asp:Label ID="lblResultado" ForeColor="Maroon" Visible="False" runat="server" />
