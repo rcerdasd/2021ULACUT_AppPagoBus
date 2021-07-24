@@ -43,6 +43,7 @@ namespace AppPagoBus
             if (Session["Tipo"].ToString() != "2")
             {
                 navBarTarjeta.Visible = false;
+                navBarRutaCliente.Visible = false;
             }
         }
     }

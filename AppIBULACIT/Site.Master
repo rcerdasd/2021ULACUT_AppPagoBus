@@ -51,13 +51,13 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a id="navBarInicio" runat="server" href="~/">Inicio</a></li>
+         
                         <li><a id="navBarRuta" runat="server" href="~/Views/frmRuta.aspx">Rutas</a></li>
                         <li><a id="navBarChofer" runat="server" href="~/Views/frmChofer.aspx">Chofer</a></li>
                         <li><a id="navBarAdmin" runat="server" href="~/Views/frmAdmin.aspx">Administrador</a></li>
                         <li><a id="navBarTarjeta" runat="server" href="~/Views/frmPago.aspx">Metodos de pago</a></li>
                         <li><a id="navBarCliente" runat="server" href="~/Views/frmCliente.aspx">Clientes</a></li>
-
+                        <li><a id="navBarRutaCliente" runat="server" href="~/Views/FrmRutaCliente.aspx">Rutas</a></li>
                         <li>
                             <asp:LinkButton ID="lnkCerrarSesion" OnClick="lnkCerrarSesion_Click" runat="server">Cerrar sesion</asp:LinkButton></li>
 
