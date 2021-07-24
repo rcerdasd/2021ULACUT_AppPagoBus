@@ -33,7 +33,7 @@ namespace AppPagoBus
 
                         if (persona != null)
                         {
-                            if (persona.Estado.ToLower()!="i")
+                            if (persona.Estado.ToLower()!="i")//estado validacion
                             {
                                 JwtSecurityToken jwtSecurityToken;
                                 var jwtHandler = new JwtSecurityTokenHandler();
