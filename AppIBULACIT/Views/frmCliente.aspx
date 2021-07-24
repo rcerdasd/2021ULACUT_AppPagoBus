@@ -23,7 +23,7 @@
         });
  </script>
     <h1>
-        <asp:Label Text="Persona" runat="server"></asp:Label></h1>
+        <asp:Label Text="Cliente" runat="server"></asp:Label></h1>
     <input id="myInput" Placeholder="Buscar" class="from-control" type="text"/>
     <asp:GridView ID="gvPersona" OnRowCommand="gvPersona_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
         <Columns>

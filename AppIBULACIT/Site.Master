@@ -1,7 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="AppPagoBus.SiteMaster" %>
 
 <!DOCTYPE html>
-
 <html lang="es">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -51,16 +50,13 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a id="navBarInicio" runat="server" href="~/">Inicio</a></li>
                         <li><a id="navBarRuta" runat="server" href="~/Views/frmRuta.aspx">Rutas</a></li>
-                        <li><a id="navBarChofer" runat="server" href="~/Views/frmChofer.aspx">Chofer</a></li>
                         <li><a id="navBarAdmin" runat="server" href="~/Views/frmAdmin.aspx">Administrador</a></li>
-                        <li><a id="navBarTarjeta" runat="server" href="~/Views/frmTarjeta.aspx">Tarjeta</a></li>
+                        <li><a id="navBarChofer" runat="server" href="~/Views/frmChofer.aspx">Chofer</a></li>
                         <li><a id="navBarCliente" runat="server" href="~/Views/frmCliente.aspx">Clientes</a></li>
-
-                        <li>
-                            <asp:LinkButton ID="lnkCerrarSesion" OnClick="lnkCerrarSesion_Click" runat="server">Cerrar sesion</asp:LinkButton></li>
-
+                        <li><a id="navBarRutaCliente" runat="server" href="~/Views/FrmRutaCliente.aspx">Rutas</a></li>
+                        <li><a id="navBarTarjeta" runat="server" href="~/Views/frmTarjeta.aspx">Métodos de Pago</a></li>
+                        <li><asp:LinkButton ID="lnkCerrarSesion" OnClick="lnkCerrarSesion_Click" runat="server">Cerrar sesión</asp:LinkButton></li>
                     </ul>
                 </div>
             </div>

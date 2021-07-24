@@ -209,6 +209,7 @@
     <Content Include="Views\frmChofer.aspx" />
     <Content Include="Views\frmCliente.aspx" />
     <Content Include="Views\frmRuta.aspx" />
+    <Content Include="Views\FrmRutaCliente.aspx" />
     <Content Include="Views\frmTarjeta.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -357,6 +358,13 @@
     </Compile>
     <Compile Include="Views\frmRuta.aspx.designer.cs">
       <DependentUpon>frmRuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FrmRutaCliente.aspx.cs">
+      <DependentUpon>FrmRutaCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\FrmRutaCliente.aspx.designer.cs">
+      <DependentUpon>FrmRutaCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmTarjeta.aspx.cs">
       <DependentUpon>frmTarjeta.aspx</DependentUpon>

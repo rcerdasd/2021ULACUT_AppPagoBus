@@ -39,7 +39,7 @@ namespace AppPagoBus.Views
             catch (Exception e)
             {
 
-                lblStatus.Text = "Hubo un error al cargar la lista de chofer. Error: " + e.Message;
+                lblStatus.Text = "Hubo un error al cargar la lista los meétodos de pago. Error: " + e.Message;
             }
         }
 
@@ -49,7 +49,7 @@ namespace AppPagoBus.Views
             lblResultado.Text = string.Empty;
         }
 
-        protected void gvChofer_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvTarjeta_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvTarjeta.Rows[index];
@@ -64,7 +64,7 @@ namespace AppPagoBus.Views
                     txtccv.Text = row.Cells[2].Text.Trim();
                     txtFechaExpiracion.Text = row.Cells[3].Text.Trim();
                     txtNombre.Text = row.Cells[4].Text.Trim();
-                    txtPredeterminado.Text = row.Cells[5].Text.Trim();
+                    ddlPredeterminado.Text = row.Cells[5].Text.Trim();
 
                     btnAceptarMant.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
@@ -81,7 +81,6 @@ namespace AppPagoBus.Views
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-
             try
             {
                 limpiarlblResultado();
@@ -93,7 +92,6 @@ namespace AppPagoBus.Views
                 lblStatus.Visible = true;
                 lblStatus.ForeColor = Color.Maroon;
             }
-
         }
 
         private void abrirMant()
@@ -112,7 +110,7 @@ namespace AppPagoBus.Views
             ltrNombre.Visible = true;
             txtNombre.Visible = true;
             ltrPredeterminado.Visible = true;
-            txtPredeterminado.Visible = true;
+            ddlPredeterminado.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
         }
 
@@ -145,7 +143,7 @@ namespace AppPagoBus.Views
                         ccv = Convert.ToInt32(txtccv.Text),
                         FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
                         Nombre = txtNombre.Text,
-                        Predeterminado = txtPredeterminado.Text
+                        Predeterminado = ddlPredeterminado.Text
                     };
 
                     TarjetaModel tarjetaIngresado = await tarjetaManager.Ingresar(tarj, Session["Token"].ToString());
@@ -174,7 +172,7 @@ namespace AppPagoBus.Views
                         ccv = Convert.ToInt32(txtccv.Text),
                         FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
                         Nombre = txtNombre.Text,
-                        Predeterminado = txtPredeterminado.Text
+                        Predeterminado = ddlPredeterminado.Text
                     };
 
                     TarjetaModel choferModificado = await tarjetaManager.Actualizar(chofer, Session["Token"].ToString());
@@ -208,6 +206,12 @@ namespace AppPagoBus.Views
         protected void btnCancelarMant_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {​​​ CloseMantenimiento(); }​​​);", true);
+        }
+
+        protected void ddlPredeterminado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlPredeterminado.Text = ddlPredeterminado.SelectedValue.ToString();
+
         }
     }
 }

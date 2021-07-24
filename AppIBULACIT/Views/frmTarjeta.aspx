@@ -23,9 +23,10 @@
             });
         });
  </script>
-    <h1>
-        <asp:Label Text="Tarjeta" runat="server"></asp:Label></h1>
+    <h1><asp:Label Text="Tarjeta" runat="server"></asp:Label></h1>
+
     <input id="myInput" Placeholder="Buscar" class="from-control" type="text"/>
+
     <asp:GridView ID="gvTarjeta" OnRowCommand="gvTarjeta_RowCommand" runat="server" AutoGenerateColumns="False" CssClass="table table-dark" CellPadding="4" GridLines="None" HeaderStyle-BackColor="Black" AlternatingRowStyle-BackColor="gray" HeaderStyle-ForeColor="LightGray">
         <Columns>
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
@@ -39,7 +40,7 @@
         </Columns>
     </asp:GridView>
     <asp:LinkButton type="button" CssClass="btn btn-success" ID="btnNuevo" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-floppy-disk'></span> Nuevo" OnClick="btnNuevo_Click" />
-    <br />
+    <br/>
     <asp:Label ID="lblStatus" ForeColor="Maroon" runat="server" Visible="false" />
 
     <div id="myModal" class="modal fade" role="dialog">
@@ -50,8 +51,7 @@
                     <h4 class="modal-title">Mis tarjetas</h4>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        <asp:Literal ID="ltrModalMensaje" runat="server" /><asp:Label ID="lblCodigoEliminar" runat="server"></asp:Label></p>
+                    <p><asp:Literal ID="ltrModalMensaje" runat="server" /><asp:Label ID="lblCodigoEliminar" runat="server"></asp:Label></p>
                 </div>
                 <div class="modal-footer">
                     <asp:LinkButton type="button" CssClass="btn btn-success" ID="btnAceptarModal" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-ok'></span> Aceptar" OnClick="btnAceptarModal_Click" />  
@@ -105,7 +105,6 @@
                             <td>
                                 <asp:Literal ID="ltrPredeterminado" Text="Predeterminado" runat="server" /></td>
                                                         <td>
-                                <asp:TextBox ID="txtPredeterminado" runat="server" CssClass="form-control" />
                                 <asp:DropDownList OnSelectedIndexChanged="ddlPredeterminado_SelectedIndexChanged" ID="ddlPredeterminado" CssClass="form-control" runat="server">
                                     <asp:ListItem Value="1">Sí</asp:ListItem>
                                     <asp:ListItem Value="0">No</asp:ListItem>
