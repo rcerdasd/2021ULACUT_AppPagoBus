@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -10,9 +11,9 @@ using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
 {
-   // [Authorize]
-    [RoutePrefix("api/chofer")]
-    public class ChoferController : ApiController
+    [Authorize]
+    [RoutePrefix("api/admin")]
+    public class AdminController : ApiController
     {
         [HttpGet]
         public IHttpActionResult GetId(int id)
@@ -24,7 +25,7 @@ namespace WebApiSegura.Controllers
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Nombre, Apellido, Identificacion, 
-                    FechaNacimiento, Usuario, Email, Tipo, Estado FROM Persona Where Tipo = 3 AND Codigo = @Codigo", sqlConnection);
+                    FechaNacimiento, Usuario, Contrasena, Email, Tipo FROM Persona Where Tipo = 1 AND Codigo = @Codigo", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Codigo", id);
 
@@ -38,11 +39,11 @@ namespace WebApiSegura.Controllers
                         persona.Nombre = sqlDataReader.GetString(1);
                         persona.Apellido = sqlDataReader.GetString(2);
                         persona.Identificacion = sqlDataReader.GetString(3);
-                        persona.FechaNacimiento = sqlDataReader.GetDateTime(4);
-                        persona.Usuario = sqlDataReader.GetString(5);
-                        persona.Email = sqlDataReader.GetString(6);
-                        persona.Tipo = sqlDataReader.GetString(7);
-                        persona.Estado = sqlDataReader.GetString(8);
+                        persona.FechaNacimiento = sqlDataReader.GetDateTime(3);
+                        persona.Usuario = sqlDataReader.GetString(3);
+                        persona.Contrasena = sqlDataReader.GetString(3);
+                        persona.Email = sqlDataReader.GetString(3);
+                        persona.Tipo = sqlDataReader.GetString(3);
                     }
 
                     sqlConnection.Close();
@@ -60,15 +61,15 @@ namespace WebApiSegura.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            List<Persona> chofer = new List<Persona>();
+            List<Persona> admin = new List<Persona>();
             try
             {
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Nombre, Apellido, Identificacion, 
-                    FechaNacimiento, Usuario, Email, Tipo, Estado FROM Persona Where Tipo = '3'", sqlConnection);
-                    //sqlCommand.Parameters.AddWithValue("@Tipo", "3");
+                    FechaNacimiento, Usuario, Contrasena, Email, Tipo FROM Persona Where Tipo = '1'", sqlConnection);
+                    //sqlCommand.Parameters.AddWithValue("@Tipo", "1");
                     sqlConnection.Open();
 
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -82,12 +83,11 @@ namespace WebApiSegura.Controllers
                         persona.Identificacion = sqlDataReader.GetString(3);
                         persona.FechaNacimiento = sqlDataReader.GetDateTime(4);
                         persona.Usuario = sqlDataReader.GetString(5);
-                        persona.Email = sqlDataReader.GetString(6);
-                        persona.Tipo = sqlDataReader.GetString(7);
-                        persona.Estado = sqlDataReader.GetString(8);
+                        persona.Contrasena = sqlDataReader.GetString(6);
+                        persona.Email = sqlDataReader.GetString(7);
+                        persona.Tipo = sqlDataReader.GetString(8);
 
-
-                        chofer.Add(persona);
+                        admin.Add(persona);
                     }
                     sqlConnection.Close();
                 }
@@ -96,7 +96,7 @@ namespace WebApiSegura.Controllers
             {
                 return InternalServerError(ex);
             }
-            return Ok(chofer);
+            return Ok(admin);
         }
 
         [HttpPost]
@@ -104,7 +104,6 @@ namespace WebApiSegura.Controllers
         {
             if (persona == null)
                 return BadRequest();
-
             try
             {
                 using (SqlConnection sqlConnection =
@@ -112,9 +111,9 @@ namespace WebApiSegura.Controllers
                 {
                     SqlCommand sqlCommand =
                         new SqlCommand(@"INSERT INTO Persona (Nombre, Apellido, Identificacion, 
-                    FechaNacimiento, Usuario, Contrasena, Email, Tipo, Saldo, Estado) 
+                    FechaNacimiento, Usuario, Contrasena, Email, Tipo, Saldo) 
                                          VALUES (@Nombre, @Apellido, @Identificacion, 
-                    @FechaNacimiento, @Usuario, @Contrasena, @Email, @Tipo, @Saldo, @Estado)",
+                    @FechaNacimiento, @Usuario, @Contrasena, @Email, @Tipo, @Saldo)",
                                          sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Nombre", persona.Nombre);
@@ -126,7 +125,6 @@ namespace WebApiSegura.Controllers
                     sqlCommand.Parameters.AddWithValue("@Email", persona.Email);
                     sqlCommand.Parameters.AddWithValue("@Tipo", persona.Tipo);
                     sqlCommand.Parameters.AddWithValue("@Saldo", 0);
-                    sqlCommand.Parameters.AddWithValue("@Estado", persona.Estado);
 
                     sqlConnection.Open();
 
@@ -164,8 +162,7 @@ namespace WebApiSegura.Controllers
                                                             Email = @Email,
                                                             Tipo = @Tipo,
                                                             Saldo = @Saldo,
-                                                            Estado = @Estado                                                            
-
+                                                            Contrasena = @Contrasena  
                                           WHERE Codigo = @Codigo",
                                          sqlConnection);
 
@@ -178,8 +175,7 @@ namespace WebApiSegura.Controllers
                     sqlCommand.Parameters.AddWithValue("@Email", persona.Email);
                     sqlCommand.Parameters.AddWithValue("@Tipo", persona.Tipo);
                     sqlCommand.Parameters.AddWithValue("@Saldo", persona.Saldo);
-                    sqlCommand.Parameters.AddWithValue("@Estado", persona.Estado);
-
+                    sqlCommand.Parameters.AddWithValue("@Contrasena", persona.Contrasena);
 
                     sqlConnection.Open();
 

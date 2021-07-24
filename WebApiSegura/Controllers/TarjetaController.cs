@@ -10,6 +10,7 @@ using WebApiSegura.Models;
 
 namespace WebApiSegura.Controllers
 {
+   // [Authorize]
     [RoutePrefix("api/tarjeta")]
     public class TarjetaController : ApiController
     {
@@ -62,7 +63,8 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Numero, CCV, FechaExpiracion, Nombre, Predeterminado FROM Tarjeta", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Numero, CCV, FechaExpiracion, Nombre, 
+                    Predeterminado FROM Tarjeta", sqlConnection);
                     sqlConnection.Open();
 
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();

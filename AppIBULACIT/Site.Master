@@ -54,6 +54,7 @@
                         <li><a runat="server" href="~/">Inicio</a></li>
                         <li><a runat="server" href="~/Views/frmRuta.aspx">Rutas</a></li>
                         <li><a runat="server" href="~/Views/frmChofer.aspx">Chofer</a></li>
+                        <li><a runat="server" href="~/Views/frmAdmin.aspx">Administrador</a></li>
                         <li><a runat="server" href="~/Views/frmTarjeta.aspx">Tarjeta</a></li>
                         <li><a runat="server" href="~/Views/frmCliente.aspx">Clientes</a></li>
 
@@ -72,7 +73,6 @@
                 <p>&copy; <%: DateTime.Now.Year %> DigiPay Costa Rica</p>
             </footer>
         </div>
-
     </form>
 </body>
 </html>
