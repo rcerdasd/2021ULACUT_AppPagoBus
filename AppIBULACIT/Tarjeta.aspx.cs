@@ -28,7 +28,6 @@ namespace AppPagoBus
                     {
                        Numero = txtNumero.Text,
                        CCV = txtNumero.Text,
-                       FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
                        Nombre = txtNombre.Text,
                        Predeterminado = txtNumero.Text
 

@@ -23,7 +23,8 @@ namespace WebApiSegura.Models
         public int Codigo { get; set; }
         public string Numero { get; set; }
         public string CCV { get; set; }
-        public System.DateTime FechaExpiracion { get; set; }
+        public int MesExpiracion { get; set; }
+        public int AnioExpiracion { get; set; }
         public string Nombre { get; set; }
         public string Predeterminado { get; set; }
         public int CodigoCliente { get; set; }

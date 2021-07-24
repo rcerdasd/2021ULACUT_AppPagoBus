@@ -155,8 +155,9 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection =
                     new SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
-                    if (persona.Contrasena!=null)
+                    if (persona.Contrasena != null)
                     {
+
                         SqlCommand sqlCommand =
                                         new SqlCommand(@"UPDATE Persona 
                                                         SET Nombre = @Nombre, 
@@ -190,11 +191,14 @@ namespace WebApiSegura.Controllers
                         int filasAfectadas = sqlCommand.ExecuteNonQuery();
 
                         sqlConnection.Close();
+
                     }
                     else
                     {
-                        SqlCommand sqlCommand =
-                            new SqlCommand(@" UPDATE Persona 
+                        if (persona.Nombre != null)
+                        {
+                            SqlCommand sqlCommand =
+                                new SqlCommand(@" UPDATE Persona 
                                                         SET Nombre = @Nombre, 
                                                             Apellido = @Apellido,
                                                             Identificacion = @Identificacion,
@@ -205,25 +209,43 @@ namespace WebApiSegura.Controllers
                                                             Saldo = @Saldo,
                                                             Estado = @Estado
                                                             WHERE Codigo = @Codigo",
-                                             sqlConnection);
+                                                 sqlConnection);
 
-                        sqlCommand.Parameters.AddWithValue("@Codigo", persona.Codigo);
-                        sqlCommand.Parameters.AddWithValue("@Nombre", persona.Nombre);
-                        sqlCommand.Parameters.AddWithValue("@Apellido", persona.Apellido);
-                        sqlCommand.Parameters.AddWithValue("@Identificacion", persona.Identificacion);
-                        sqlCommand.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimiento);
-                        sqlCommand.Parameters.AddWithValue("@Usuario", persona.Usuario);
-                        sqlCommand.Parameters.AddWithValue("@Email", persona.Email);
-                        sqlCommand.Parameters.AddWithValue("@Tipo", persona.Tipo);
-                        sqlCommand.Parameters.AddWithValue("@Saldo", persona.Saldo);
-                        sqlCommand.Parameters.AddWithValue("@Estado", persona.Estado);
+                            sqlCommand.Parameters.AddWithValue("@Codigo", persona.Codigo);
+                            sqlCommand.Parameters.AddWithValue("@Nombre", persona.Nombre);
+                            sqlCommand.Parameters.AddWithValue("@Apellido", persona.Apellido);
+                            sqlCommand.Parameters.AddWithValue("@Identificacion", persona.Identificacion);
+                            sqlCommand.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimiento);
+                            sqlCommand.Parameters.AddWithValue("@Usuario", persona.Usuario);
+                            sqlCommand.Parameters.AddWithValue("@Email", persona.Email);
+                            sqlCommand.Parameters.AddWithValue("@Tipo", persona.Tipo);
+                            sqlCommand.Parameters.AddWithValue("@Saldo", persona.Saldo);
+                            sqlCommand.Parameters.AddWithValue("@Estado", persona.Estado);
 
 
-                        sqlConnection.Open();
+                            sqlConnection.Open();
 
-                        int filasAfectadas = sqlCommand.ExecuteNonQuery();
+                            int filasAfectadas = sqlCommand.ExecuteNonQuery();
 
-                        sqlConnection.Close();
+                            sqlConnection.Close();
+                        }
+                        else
+                        {
+                            SqlCommand sqlCommand =
+                new SqlCommand(@"UPDATE Persona 
+                                                        SET Saldo = @Saldo
+                                                            WHERE Codigo = @Codigo",
+sqlConnection);
+
+                            sqlCommand.Parameters.AddWithValue("@Codigo", persona.Codigo);
+                            sqlCommand.Parameters.AddWithValue("@Saldo", persona.Saldo);
+
+                            sqlConnection.Open();
+
+                            int filasAfectadas = sqlCommand.ExecuteNonQuery();
+
+                            sqlConnection.Close();
+                        }
                     }
                 }
             }

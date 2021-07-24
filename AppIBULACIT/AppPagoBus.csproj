@@ -209,6 +209,7 @@
     <Content Include="Views\frmChofer.aspx" />
     <Content Include="Views\frmCliente.aspx" />
     <Content Include="Views\frmPago.aspx" />
+    <Content Include="Views\frmRecarga.aspx" />
     <Content Include="Views\frmRuta.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -357,6 +358,13 @@
     </Compile>
     <Compile Include="Views\frmPago.aspx.designer.cs">
       <DependentUpon>frmPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmRecarga.aspx.cs">
+      <DependentUpon>frmRecarga.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmRecarga.aspx.designer.cs">
+      <DependentUpon>frmRecarga.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmRuta.aspx.cs">
       <DependentUpon>frmRuta.aspx</DependentUpon>

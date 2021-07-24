@@ -35,7 +35,8 @@
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="Numero" DataField="Numero" />
             <asp:BoundField HeaderText="CCV" DataField="CCV" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
-            <asp:BoundField HeaderText="FechaExpiracion" DataField="FechaExpiracion" />
+            <asp:BoundField HeaderText="MesExpiracion" DataField="MesExpiracion" />
+                        <asp:BoundField HeaderText="Anio Expiracion" DataField="AnioExpiracion" />
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Predeterminado" DataField="Predeterminado" />
             <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
@@ -96,9 +97,15 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Literal ID="ltrFechaExpiracion" Text="FechaExpiracion" runat="server" /></td>
+                                <asp:Literal ID="ltrMesExpiracion" Text="Mes Expiracion" runat="server" /></td>
                             <td>
-                                <asp:TextBox ID="txtFechaExpiracion" runat="server" CssClass="form-control" /></td>
+                                <asp:TextBox ID="txtMesExpiracion" runat="server" CssClass="form-control" /></td>
+                        </tr>
+                                                <tr>
+                            <td>
+                                <asp:Literal ID="ltrAnioExpiracion" Text="Anio Expiracion" runat="server" /></td>
+                            <td>
+                                <asp:TextBox ID="txtAnioExpiracion" runat="server" CssClass="form-control" /></td>
                         </tr>
                         <tr>
                             <td>

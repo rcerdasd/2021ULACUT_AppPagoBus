@@ -13,10 +13,10 @@ namespace WebApiSegura.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ULACIT2021_PAGO_ELECTRONICO_BUSESEntities1 : DbContext
+    public partial class ULACIT2021_PAGO_ELECTRONICO_BUSESEntities2 : DbContext
     {
-        public ULACIT2021_PAGO_ELECTRONICO_BUSESEntities1()
-            : base("name=ULACIT2021_PAGO_ELECTRONICO_BUSESEntities1")
+        public ULACIT2021_PAGO_ELECTRONICO_BUSESEntities2()
+            : base("name=ULACIT2021_PAGO_ELECTRONICO_BUSESEntities2")
         {
         }
     

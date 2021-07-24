@@ -31,7 +31,7 @@ namespace AppIBULACIT.Views
         {
             try
             {
-                tarjetaList = await tarjetaManager.GetAll(Session["Token"].ToString());
+                tarjetaList = await tarjetaManager.GetId(Session["Token"].ToString(),Session["CodigoUsuario"].ToString());
                 gvTarjetas.DataSource = tarjetaList.ToList();
                 gvTarjetas.DataBind();
             }
@@ -61,9 +61,10 @@ namespace AppIBULACIT.Views
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
                     txtNumero.Text = row.Cells[1].Text.Trim();
                     txtCcv.Text = row.Cells[2].Text.Trim();
-                    txtFechaExpiracion.Text = row.Cells[3].Text.Trim();
-                    txtNombre.Text = row.Cells[4].Text.Trim();
-                    ddlPredeterminado.SelectedValue = row.Cells[5].Text.Trim();
+                    txtMesExpiracion.Text = row.Cells[3].Text.Trim();
+                    txtAnioExpiracion.Text = row.Cells[4].Text.Trim();
+                    txtNombre.Text = row.Cells[5].Text.Trim();
+                    ddlPredeterminado.SelectedValue = row.Cells[6].Text.Trim();
                     btnAceptarMant.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
                     break;
@@ -135,7 +136,8 @@ namespace AppIBULACIT.Views
                     {
                         Numero = txtNumero.Text,
                         CCV = txtCcv.Text,
-                        FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
+                        MesExpiracion = Convert.ToInt32(txtMesExpiracion.Text),
+                        AnioExpiracion = Convert.ToInt32(txtAnioExpiracion.Text),
                         Nombre = txtNombre.Text,
                         Predeterminado = ddlPredeterminado.SelectedValue,
                         CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())
@@ -166,7 +168,8 @@ namespace AppIBULACIT.Views
                         Codigo = Convert.ToInt32(txtCodigoMant.Text),
                         Numero = txtNumero.Text,
                         CCV = txtCcv.Text,
-                        FechaExpiracion = Convert.ToDateTime(txtFechaExpiracion.Text),
+                        MesExpiracion = Convert.ToInt32(txtMesExpiracion.Text),
+                        AnioExpiracion = Convert.ToInt32(txtAnioExpiracion.Text),
                         Nombre = txtNombre.Text,
                         Predeterminado = ddlPredeterminado.SelectedValue,
                         CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())

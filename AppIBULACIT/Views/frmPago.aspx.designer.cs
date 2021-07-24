@@ -141,22 +141,40 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.TextBox txtCcv;
 
         /// <summary>
-        /// ltrFechaExpiracion control.
+        /// ltrMesExpiracion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrFechaExpiracion;
+        protected global::System.Web.UI.WebControls.Literal ltrMesExpiracion;
 
         /// <summary>
-        /// txtFechaExpiracion control.
+        /// txtMesExpiracion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaExpiracion;
+        protected global::System.Web.UI.WebControls.TextBox txtMesExpiracion;
+
+        /// <summary>
+        /// ltrAnioExpiracion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrAnioExpiracion;
+
+        /// <summary>
+        /// txtAnioExpiracion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAnioExpiracion;
 
         /// <summary>
         /// ltrNombre control.
