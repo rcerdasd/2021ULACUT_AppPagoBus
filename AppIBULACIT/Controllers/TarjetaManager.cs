@@ -24,13 +24,22 @@ namespace AppPagoBus.Controllers
             return httpClient;
         }
 
-        public async Task<TarjetaModel> GetId(string token, string codigo)
+        /*public async Task<TarjetaModel> GetId(string token, string codigo)
         {
             HttpClient httpClient = GetClient(token);
 
             var response = await httpClient.GetStringAsync(string.Concat(UrlBase, codigo));
 
             return JsonConvert.DeserializeObject<TarjetaModel>(response);
+        }*/
+
+        public async Task<IEnumerable<TarjetaModel>> GetId(string token, string codigo)
+        {
+            HttpClient httpClient = GetClient(token);
+
+            var response = await httpClient.GetStringAsync(string.Concat(UrlBase, codigo));
+
+            return JsonConvert.DeserializeObject<IEnumerable<TarjetaModel>>(response);
         }
 
         public async Task<IEnumerable<TarjetaModel>> GetAll(string token)
@@ -46,7 +55,7 @@ namespace AppPagoBus.Controllers
         {
             HttpClient httpClient = GetClient(token);
 
-            var response = await httpClient.PostAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(tarjeta), Encoding.UTF8, "application/jon"));
+            var response = await httpClient.PostAsync(UrlBase, new StringContent(JsonConvert.SerializeObject(tarjeta), Encoding.UTF8, "application/json"));
 
             return JsonConvert.DeserializeObject<TarjetaModel>(await response.Content.ReadAsStringAsync());
         }

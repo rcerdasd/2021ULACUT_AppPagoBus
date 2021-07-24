@@ -17,17 +17,20 @@ namespace WebApiSegura.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tarjeta()
         {
-            this.ClienteTarjeta = new HashSet<ClienteTarjeta>();
+            this.Transaccion = new HashSet<Transaccion>();
         }
     
         public int Codigo { get; set; }
-        public decimal Numero { get; set; }
-        public decimal CCV { get; set; }
-        public System.DateTime FechaExpiracion { get; set; }
+        public string Numero { get; set; }
+        public string CCV { get; set; }
+        public int MesExpiracion { get; set; }
+        public int AnioExpiracion { get; set; }
         public string Nombre { get; set; }
         public string Predeterminado { get; set; }
+        public int CodigoCliente { get; set; }
     
+        public virtual Persona Persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClienteTarjeta> ClienteTarjeta { get; set; }
+        public virtual ICollection<Transaccion> Transaccion { get; set; }
     }
 }

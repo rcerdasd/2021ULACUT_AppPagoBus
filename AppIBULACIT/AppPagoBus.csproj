@@ -208,8 +208,9 @@
     <Content Include="Views\FrmAdmin.aspx" />
     <Content Include="Views\frmChofer.aspx" />
     <Content Include="Views\frmCliente.aspx" />
+    <Content Include="Views\frmPago.aspx" />
+    <Content Include="Views\frmRecarga.aspx" />
     <Content Include="Views\frmRuta.aspx" />
-    <Content Include="Views\frmTarjeta.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -351,19 +352,26 @@
     <Compile Include="Views\frmCliente.aspx.designer.cs">
       <DependentUpon>frmCliente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmPago.aspx.cs">
+      <DependentUpon>frmPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmPago.aspx.designer.cs">
+      <DependentUpon>frmPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmRecarga.aspx.cs">
+      <DependentUpon>frmRecarga.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmRecarga.aspx.designer.cs">
+      <DependentUpon>frmRecarga.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmRuta.aspx.cs">
       <DependentUpon>frmRuta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\frmRuta.aspx.designer.cs">
       <DependentUpon>frmRuta.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\frmTarjeta.aspx.cs">
-      <DependentUpon>frmTarjeta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\frmTarjeta.aspx.designer.cs">
-      <DependentUpon>frmTarjeta.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

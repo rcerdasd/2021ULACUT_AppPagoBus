@@ -22,8 +22,8 @@ namespace WebApiSegura.Models
         public decimal Monto { get; set; }
         public string Estado { get; set; }
     
-        public virtual ClienteTarjeta ClienteTarjeta { get; set; }
         public virtual Persona Persona { get; set; }
         public virtual Ruta Ruta { get; set; }
+        public virtual Tarjeta Tarjeta { get; set; }
     }
 }

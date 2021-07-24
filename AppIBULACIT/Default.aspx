@@ -14,7 +14,7 @@
                 <p>
                     <asp:Label ID="lblSaldoCliente" ForeColor="Black" Visible="false" runat="server" Text="Tu saldo"></asp:Label>
                 </p>
-                <a href="#" class="btn btn-success">Recarga tu saldo</a>
+                <a href="Views/frmRecarga.aspx" class="btn btn-success">Recarga tu saldo</a>
             </div>
         </div>
     </div>

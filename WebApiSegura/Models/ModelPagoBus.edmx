@@ -4,15 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ClienteTarjeta">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClienteId" Type="int" Nullable="false" />
-          <Property Name="TarjetaId" Type="int" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Persona">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -27,6 +19,7 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Saldo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="Ruta">
           <Key>
@@ -60,11 +53,13 @@
             <PropertyRef Name="Codigo" />
           </Key>
           <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Numero" Type="numeric" Precision="16" Scale="0" Nullable="false" />
-          <Property Name="CCV" Type="numeric" Precision="4" Scale="0" Nullable="false" />
-          <Property Name="FechaExpiracion" Type="datetime" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="CCV" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MesExpiracion" Type="int" Nullable="false" />
+          <Property Name="AnioExpiracion" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Predeterminado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CodigoCliente" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Transaccion">
           <Key>
@@ -90,7 +85,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RutaChofe__Codig__68487DD7">
+        <Association Name="FK__RutaChofe__Codig__6B24EA82">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
           <End Role="RutaChofer" Type="Self.RutaChofer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -102,35 +97,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClienteTarjeta_Persona">
+        <Association Name="FK__Tarjeta__CodigoC__7F2BE32F">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="ClienteTarjeta" Type="Self.ClienteTarjeta" Multiplicity="*" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
               <PropertyRef Name="Codigo" />
             </Principal>
-            <Dependent Role="ClienteTarjeta">
-              <PropertyRef Name="ClienteId" />
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="CodigoCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClienteTarjeta_Tarjeta">
+        <Association Name="FK__Transacci__Tarje__00200768">
           <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="1" />
-          <End Role="ClienteTarjeta" Type="Self.ClienteTarjeta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tarjeta">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="ClienteTarjeta">
-              <PropertyRef Name="TarjetaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transaccion_ClienteTarjeta">
-          <End Role="ClienteTarjeta" Type="Self.ClienteTarjeta" Multiplicity="1" />
           <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ClienteTarjeta">
+            <Principal Role="Tarjeta">
               <PropertyRef Name="Codigo" />
             </Principal>
             <Dependent Role="Transaccion">
@@ -163,7 +146,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ULACIT2021_PAGO_ELECTRONICO_BUSESModelStoreContainer">
-          <EntitySet Name="ClienteTarjeta" EntityType="Self.ClienteTarjeta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ruta" EntityType="Self.Ruta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RutaChofer" EntityType="Self.RutaChofer" Schema="dbo" store:Type="Tables" />
@@ -174,20 +156,16 @@
             <End Role="Ruta" EntitySet="Ruta" />
             <End Role="RutaChofer" EntitySet="RutaChofer" />
           </AssociationSet>
-          <AssociationSet Name="FK__RutaChofe__Codig__68487DD7" Association="Self.FK__RutaChofe__Codig__68487DD7">
+          <AssociationSet Name="FK__RutaChofe__Codig__6B24EA82" Association="Self.FK__RutaChofe__Codig__6B24EA82">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="RutaChofer" EntitySet="RutaChofer" />
           </AssociationSet>
-          <AssociationSet Name="FK_ClienteTarjeta_Persona" Association="Self.FK_ClienteTarjeta_Persona">
+          <AssociationSet Name="FK__Tarjeta__CodigoC__7F2BE32F" Association="Self.FK__Tarjeta__CodigoC__7F2BE32F">
             <End Role="Persona" EntitySet="Persona" />
-            <End Role="ClienteTarjeta" EntitySet="ClienteTarjeta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClienteTarjeta_Tarjeta" Association="Self.FK_ClienteTarjeta_Tarjeta">
             <End Role="Tarjeta" EntitySet="Tarjeta" />
-            <End Role="ClienteTarjeta" EntitySet="ClienteTarjeta" />
           </AssociationSet>
-          <AssociationSet Name="FK_Transaccion_ClienteTarjeta" Association="Self.FK_Transaccion_ClienteTarjeta">
-            <End Role="ClienteTarjeta" EntitySet="ClienteTarjeta" />
+          <AssociationSet Name="FK__Transacci__Tarje__00200768" Association="Self.FK__Transacci__Tarje__00200768">
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
             <End Role="Transaccion" EntitySet="Transaccion" />
           </AssociationSet>
           <AssociationSet Name="FK_Transaccion_Persona" Association="Self.FK_Transaccion_Persona">
@@ -199,21 +177,11 @@
             <End Role="Transaccion" EntitySet="Transaccion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ULACIT2021_PAGO_ELECTRONICO_BUSESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ClienteTarjeta">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClienteId" Type="Int32" Nullable="false" />
-          <Property Name="TarjetaId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_ClienteTarjeta_Persona" FromRole="ClienteTarjeta" ToRole="Persona" />
-          <NavigationProperty Name="Tarjeta" Relationship="Self.FK_ClienteTarjeta_Tarjeta" FromRole="ClienteTarjeta" ToRole="Tarjeta" />
-          <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_ClienteTarjeta" FromRole="ClienteTarjeta" ToRole="Transaccion" />
-        </EntityType>
         <EntityType Name="Persona">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -228,9 +196,10 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Saldo" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <NavigationProperty Name="ClienteTarjeta" Relationship="Self.FK_ClienteTarjeta_Persona" FromRole="Persona" ToRole="ClienteTarjeta" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RutaChofer" Relationship="Self.FK__RutaChofe__Codig__6B24EA82" FromRole="Persona" ToRole="RutaChofer" />
+          <NavigationProperty Name="Tarjeta" Relationship="Self.FK__Tarjeta__CodigoC__7F2BE32F" FromRole="Persona" ToRole="Tarjeta" />
           <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Persona" FromRole="Persona" ToRole="Transaccion" />
-          <NavigationProperty Name="RutaChofer" Relationship="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__68487DD7" FromRole="Persona" ToRole="RutaChofer" />
         </EntityType>
         <EntityType Name="Ruta">
           <Key>
@@ -239,9 +208,19 @@
           <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Costo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Ruta" FromRole="Ruta" ToRole="Transaccion" />
-          <Property Name="Provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RutaChofer" Relationship="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__6754599E" FromRole="Ruta" ToRole="RutaChofer" />
+          <Property Name="Provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="RutaChofer" Relationship="Self.FK__RutaChofe__Codig__6754599E" FromRole="Ruta" ToRole="RutaChofer" />
+          <NavigationProperty Name="Transaccion" Relationship="Self.FK_Transaccion_Ruta1" FromRole="Ruta" ToRole="Transaccion" />
+        </EntityType>
+        <EntityType Name="RutaChofer">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoRuta" Type="Int32" Nullable="false" />
+          <Property Name="CodigoCTP" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__RutaChofe__Codig__6B24EA82" FromRole="RutaChofer" ToRole="Persona" />
+          <NavigationProperty Name="Ruta" Relationship="Self.FK__RutaChofe__Codig__6754599E" FromRole="RutaChofer" ToRole="Ruta" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -258,12 +237,15 @@
             <PropertyRef Name="Codigo" />
           </Key>
           <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Numero" Type="Decimal" Precision="16" Scale="0" Nullable="false" />
-          <Property Name="CCV" Type="Decimal" Precision="4" Scale="0" Nullable="false" />
-          <Property Name="FechaExpiracion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Numero" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CCV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MesExpiracion" Type="Int32" Nullable="false" />
+          <Property Name="AnioExpiracion" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Predeterminado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ClienteTarjeta" Relationship="Self.FK_ClienteTarjeta_Tarjeta" FromRole="Tarjeta" ToRole="ClienteTarjeta" />
+          <Property Name="CodigoCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK__Tarjeta__CodigoC__7F2BE32F" FromRole="Tarjeta" ToRole="Persona" />
+          <NavigationProperty Name="Transaccion" Relationship="Self.FK__Transacci__Tarje__00200768" FromRole="Tarjeta" ToRole="Transaccion" />
         </EntityType>
         <EntityType Name="Transaccion">
           <Key>
@@ -276,43 +258,31 @@
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Monto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ClienteTarjeta" Relationship="Self.FK_Transaccion_ClienteTarjeta" FromRole="Transaccion" ToRole="ClienteTarjeta" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Transaccion_Persona" FromRole="Transaccion" ToRole="Persona" />
-          <NavigationProperty Name="Ruta" Relationship="Self.FK_Transaccion_Ruta" FromRole="Transaccion" ToRole="Ruta" />
+          <NavigationProperty Name="Ruta" Relationship="Self.FK_Transaccion_Ruta1" FromRole="Transaccion" ToRole="Ruta" />
+          <NavigationProperty Name="Tarjeta" Relationship="Self.FK__Transacci__Tarje__00200768" FromRole="Transaccion" ToRole="Tarjeta" />
         </EntityType>
-        <Association Name="FK_ClienteTarjeta_Persona">
+        <Association Name="FK__RutaChofe__Codig__6B24EA82">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="ClienteTarjeta" Type="Self.ClienteTarjeta" Multiplicity="*" />
+          <End Role="RutaChofer" Type="Self.RutaChofer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
               <PropertyRef Name="Codigo" />
             </Principal>
-            <Dependent Role="ClienteTarjeta">
-              <PropertyRef Name="ClienteId" />
+            <Dependent Role="RutaChofer">
+              <PropertyRef Name="CodigoCTP" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClienteTarjeta_Tarjeta">
-          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="1" />
-          <End Role="ClienteTarjeta" Type="Self.ClienteTarjeta" Multiplicity="*" />
+        <Association Name="FK__Tarjeta__CodigoC__7F2BE32F">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tarjeta">
+            <Principal Role="Persona">
               <PropertyRef Name="Codigo" />
             </Principal>
-            <Dependent Role="ClienteTarjeta">
-              <PropertyRef Name="TarjetaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transaccion_ClienteTarjeta">
-          <End Role="ClienteTarjeta" Type="Self.ClienteTarjeta" Multiplicity="1" />
-          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClienteTarjeta">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Transaccion">
-              <PropertyRef Name="TarjetaClienteId" />
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="CodigoCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -328,7 +298,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Transaccion_Ruta">
+        <Association Name="FK__RutaChofe__Codig__6754599E">
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="1" />
+          <End Role="RutaChofer" Type="Self.RutaChofer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="RutaChofer">
+              <PropertyRef Name="CodigoRuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaccion_Ruta1">
           <End Role="Ruta" Type="Self.Ruta" Multiplicity="1" />
           <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -340,92 +322,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ULACIT2021_PAGO_ELECTRONICO_BUSESEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ClienteTarjeta" EntityType="Self.ClienteTarjeta" />
+        <Association Name="FK__Transacci__Tarje__00200768">
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="1" />
+          <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarjeta">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Transaccion">
+              <PropertyRef Name="TarjetaClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ULACIT2021_PAGO_ELECTRONICO_BUSESEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Persona" EntityType="Self.Persona" />
           <EntitySet Name="Ruta" EntityType="Self.Ruta" />
+          <EntitySet Name="RutaChofer" EntityType="Self.RutaChofer" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" />
           <EntitySet Name="Transaccion" EntityType="Self.Transaccion" />
-          <AssociationSet Name="FK_ClienteTarjeta_Persona" Association="Self.FK_ClienteTarjeta_Persona">
+          <AssociationSet Name="FK__RutaChofe__Codig__6B24EA82" Association="Self.FK__RutaChofe__Codig__6B24EA82">
             <End Role="Persona" EntitySet="Persona" />
-            <End Role="ClienteTarjeta" EntitySet="ClienteTarjeta" />
+            <End Role="RutaChofer" EntitySet="RutaChofer" />
           </AssociationSet>
-          <AssociationSet Name="FK_ClienteTarjeta_Tarjeta" Association="Self.FK_ClienteTarjeta_Tarjeta">
+          <AssociationSet Name="FK__Tarjeta__CodigoC__7F2BE32F" Association="Self.FK__Tarjeta__CodigoC__7F2BE32F">
+            <End Role="Persona" EntitySet="Persona" />
             <End Role="Tarjeta" EntitySet="Tarjeta" />
-            <End Role="ClienteTarjeta" EntitySet="ClienteTarjeta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transaccion_ClienteTarjeta" Association="Self.FK_Transaccion_ClienteTarjeta">
-            <End Role="ClienteTarjeta" EntitySet="ClienteTarjeta" />
-            <End Role="Transaccion" EntitySet="Transaccion" />
           </AssociationSet>
           <AssociationSet Name="FK_Transaccion_Persona" Association="Self.FK_Transaccion_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Transaccion" EntitySet="Transaccion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Transaccion_Ruta" Association="Self.FK_Transaccion_Ruta">
+          <AssociationSet Name="FK__RutaChofe__Codig__6754599E" Association="Self.FK__RutaChofe__Codig__6754599E">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="RutaChofer" EntitySet="RutaChofer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaccion_Ruta1" Association="Self.FK_Transaccion_Ruta1">
             <End Role="Ruta" EntitySet="Ruta" />
             <End Role="Transaccion" EntitySet="Transaccion" />
           </AssociationSet>
-          <EntitySet Name="RutaChofer" EntityType="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.RutaChofer" />
-          <AssociationSet Name="FK__RutaChofe__Codig__68487DD7" Association="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__68487DD7">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="RutaChofer" EntitySet="RutaChofer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__RutaChofe__Codig__6754599E" Association="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__6754599E">
-            <End Role="Ruta" EntitySet="Ruta" />
-            <End Role="RutaChofer" EntitySet="RutaChofer" />
+          <AssociationSet Name="FK__Transacci__Tarje__00200768" Association="Self.FK__Transacci__Tarje__00200768">
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+            <End Role="Transaccion" EntitySet="Transaccion" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="RutaChofer">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CodigoRuta" Type="Int32" Nullable="false" />
-          <Property Name="CodigoCTP" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__68487DD7" FromRole="RutaChofer" ToRole="Persona" />
-          <NavigationProperty Name="Ruta" Relationship="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.FK__RutaChofe__Codig__6754599E" FromRole="RutaChofer" ToRole="Ruta" />
-        </EntityType>
-        <Association Name="FK__RutaChofe__Codig__68487DD7">
-          <End Type="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.Persona" Role="Persona" Multiplicity="1" />
-          <End Type="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.RutaChofer" Role="RutaChofer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="RutaChofer">
-              <PropertyRef Name="CodigoCTP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__RutaChofe__Codig__6754599E">
-          <End Type="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.Ruta" Role="Ruta" Multiplicity="1" />
-          <End Type="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.RutaChofer" Role="RutaChofer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ruta">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="RutaChofer">
-              <PropertyRef Name="CodigoRuta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ULACIT2021_PAGO_ELECTRONICO_BUSESModelStoreContainer" CdmEntityContainer="ULACIT2021_PAGO_ELECTRONICO_BUSESEntities">
-          <EntitySetMapping Name="ClienteTarjeta">
-            <EntityTypeMapping TypeName="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.ClienteTarjeta">
-              <MappingFragment StoreEntitySet="ClienteTarjeta">
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
-                <ScalarProperty Name="TarjetaId" ColumnName="TarjetaId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="ULACIT2021_PAGO_ELECTRONICO_BUSESModelStoreContainer" CdmEntityContainer="ULACIT2021_PAGO_ELECTRONICO_BUSESEntities2">
           <EntitySetMapping Name="Persona">
             <EntityTypeMapping TypeName="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.Persona">
               <MappingFragment StoreEntitySet="Persona">
@@ -439,16 +385,26 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ruta">
             <EntityTypeMapping TypeName="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.Ruta">
               <MappingFragment StoreEntitySet="Ruta">
-                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RutaChofer">
+            <EntityTypeMapping TypeName="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.RutaChofer">
+              <MappingFragment StoreEntitySet="RutaChofer">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="CodigoRuta" ColumnName="CodigoRuta" />
+                <ScalarProperty Name="CodigoCTP" ColumnName="CodigoCTP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -469,9 +425,11 @@
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="CCV" ColumnName="CCV" />
-                <ScalarProperty Name="FechaExpiracion" ColumnName="FechaExpiracion" />
+                <ScalarProperty Name="MesExpiracion" ColumnName="MesExpiracion" />
+                <ScalarProperty Name="AnioExpiracion" ColumnName="AnioExpiracion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Predeterminado" ColumnName="Predeterminado" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -485,15 +443,6 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Monto" ColumnName="Monto" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RutaChofer">
-            <EntityTypeMapping TypeName="ULACIT2021_PAGO_ELECTRONICO_BUSESModel.RutaChofer">
-              <MappingFragment StoreEntitySet="RutaChofer">
-                <ScalarProperty Name="CodigoCTP" ColumnName="CodigoCTP" />
-                <ScalarProperty Name="CodigoRuta" ColumnName="CodigoRuta" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
