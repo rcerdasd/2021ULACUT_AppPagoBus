@@ -42,7 +42,7 @@ namespace AppPagoBus
             try
             {
                 string tipoUsuario = Session["Tipo"].ToString();
-                if (tipoUsuario.Equals("1"))
+                if (tipoUsuario.Equals("2"))
                 {
                     lblSaldoCliente.Text = "Tu saldo es de ₡" + Session["Saldo"].ToString();
                     lblSaldoCliente.Visible = true;

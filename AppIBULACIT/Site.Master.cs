@@ -21,7 +21,7 @@ namespace AppPagoBus
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            inicializarHeaderTools();
         }
 
         protected void lnkCerrarSesion_Click(object sender, EventArgs e)
@@ -29,6 +29,21 @@ namespace AppPagoBus
             Session.Abandon();
             FormsAuthentication.SignOut();
             Response.Redirect("~/Login.aspx");
+        }
+
+        protected void inicializarHeaderTools()
+        {
+            if (Session["Tipo"].ToString() != "1")
+            {
+                navBarCliente.Visible = false;
+                navBarAdmin.Visible = false;
+                navBarChofer.Visible = false;
+                navBarRuta.Visible = false;
+            }
+            if (Session["Tipo"].ToString() != "2")
+            {
+                navBarTarjeta.Visible = false;
+            }
         }
     }
 }

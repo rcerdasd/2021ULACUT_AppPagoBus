@@ -147,7 +147,7 @@ hr {
     <div id="myModal" class="modal">
         <form class="modal-content animate" runat="server">
             <div class="imgcontainer">
-                <img src="img/img_avatar2.png" class="avatar" width="100" height="100" style="align-items:center" />
+                <img src="img/busIcon.png" class="avatar" width="100" height="100" style="align-items:center" />
             </div>
             <div class="container">
                 <h1>Login</h1>

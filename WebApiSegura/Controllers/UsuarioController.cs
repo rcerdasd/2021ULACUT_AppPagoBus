@@ -68,7 +68,7 @@ namespace WebApiSegura.Controllers
                     SqlConnection(ConfigurationManager.ConnectionStrings["ULACIT2021_PAGO_ELECTRONICO_BUSES"].ConnectionString))
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Nombre, Apellido, Identificacion, 
-                    FechaNacimiento, Usuario, Email, Saldo, Estado FROM Persona Where Tipo = '1' OR Tipo = '4'", sqlConnection);
+                    FechaNacimiento, Usuario, Email, Saldo, Estado FROM Persona Where Tipo = '2'", sqlConnection);
                     //sqlCommand.Parameters.AddWithValue("@Tipo", "3");
                     sqlConnection.Open();
 

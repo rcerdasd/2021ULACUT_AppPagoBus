@@ -44,7 +44,7 @@ namespace AppPagoBus
                         Usuario = txtUsername.Text,
                         Contrasena = txtPassword.Text,
                         Email = txtEmail.Text,
-                        Tipo = ddlTipoUsuario.SelectedItem.Value,
+                        Tipo = "2",
                         Saldo = 0
                     };
 

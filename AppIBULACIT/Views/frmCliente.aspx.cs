@@ -164,7 +164,7 @@ namespace AppIBULACIT.Views
                         Usuario = txtUsuario.Text,
                         Contrasena = txtContrasena.Text,
                         Email = txtEmail.Text,
-                        Tipo = "1",
+                        Tipo = "2",
                         Saldo = Convert.ToDecimal(txtSaldo.Text),
                         Estado = ddlEstadoMant.SelectedValue
                     };
@@ -198,7 +198,7 @@ namespace AppIBULACIT.Views
                         FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text),
                         Usuario = txtUsuario.Text,
                         Email = txtEmail.Text,
-                        Tipo = "1",
+                        Tipo = "2",
                         Saldo = Convert.ToDecimal(txtSaldo.Text),
                         Estado = ddlEstadoMant.SelectedValue
                     };

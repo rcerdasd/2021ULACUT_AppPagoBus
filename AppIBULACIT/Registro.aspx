@@ -151,12 +151,7 @@ hr {
                     &nbsp;<img src="img/img_avatar2.png" class="auto-style1" /></div>
                 <div class="container">
                     <h1>Registro</h1>
-                                    <asp:Label ID="lblTipoUsuario" runat="server" Text="Tipo de usuario" AssociatedControlID="ddlTipoUsuario"></asp:Label>
-                    <asp:DropDownList ID="ddlTipoUsuario" runat="server">
-                        <asp:ListItem Value="1">Admin</asp:ListItem>
-                        <asp:ListItem Value="2">Cliente</asp:ListItem>
-                        <asp:ListItem Value="3">Chofer</asp:ListItem>
-                    </asp:DropDownList>
+       
                     <asp:TextBox ID="txtIdentificacion" Placeholder="Ingrese su identificacion" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvIdentificacion" runat="server" 
                         ErrorMessage="La identificacion es requerida" ControlToValidate="txtIdentificacion" ForeColor="Maroon"></asp:RequiredFieldValidator>
