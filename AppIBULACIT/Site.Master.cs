@@ -22,7 +22,23 @@ namespace AppPagoBus
         protected void Page_Load(object sender, EventArgs e)
         {
             inicializarHeaderTools();
+            bajoSaldo();
         }
+
+        protected void bajoSaldo()
+        {
+            if (Convert.ToDecimal(Session["Saldo"].ToString()) < 1000)
+            {
+                lblAlerta.Text = "Saldo bajo. Considere recargar.";
+                lblAlerta.Visible = true;
+            }
+            else
+            {
+                lblAlerta.Visible = false;
+            }
+        }
+
+
 
         protected void lnkCerrarSesion_Click(object sender, EventArgs e)
         {
