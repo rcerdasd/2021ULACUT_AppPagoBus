@@ -15,7 +15,6 @@
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
 </head>
 <body>
     <form runat="server">
@@ -58,17 +57,22 @@
                         <li><a id="navBarTarjeta" runat="server" href="~/Views/frmPago.aspx">Metodos de pago</a></li>
                         <li><a id="navBarCliente" runat="server" href="~/Views/frmCliente.aspx">Clientes</a></li>
                         <li><a id="navBarRutaCliente" runat="server" href="~/Views/FrmRutaCliente.aspx">Rutas</a></li>
-                        <li>
-                            <asp:LinkButton ID="lnkCerrarSesion" OnClick="lnkCerrarSesion_Click" runat="server">Cerrar sesion</asp:LinkButton></li>
+                        <li><asp:LinkButton ID="lnkCerrarSesion" OnClick="lnkCerrarSesion_Click" runat="server">Cerrar sesion</asp:LinkButton></li>
 
                     </ul>
                 </div>
             </div>
         </div>
+
         <div class="container body-content">
+                                
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
+            <div style="align-content:center; align-content:center; text-align:center">
+            <asp:Label ID="lblAlerta" ForeColor="White" BackColor="Maroon" runat="server" Text="Saldo bajo. Considere recargar."></asp:Label>
+        </div>
             <hr />
+
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> DigiPay Costa Rica</p>
             </footer>
