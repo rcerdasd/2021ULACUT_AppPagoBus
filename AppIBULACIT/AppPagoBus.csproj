@@ -210,6 +210,8 @@
     <Content Include="Views\frmCliente.aspx" />
     <Content Include="Views\frmPago.aspx" />
     <Content Include="Views\frmRecarga.aspx" />
+    <Content Include="Views\frmReportePagos.aspx" />
+    <Content Include="Views\frmReporteViajes.aspx" />
     <Content Include="Views\frmRuta.aspx" />
     <Content Include="Views\FrmRutaCliente.aspx" />
     <Content Include="Web.config" />
@@ -260,6 +262,7 @@
     <Compile Include="Controllers\PersonaManager.cs" />
     <Compile Include="Controllers\RutaManager.cs" />
     <Compile Include="Controllers\TarjetaManager.cs" />
+    <Compile Include="Controllers\TransaccionManager.cs" />
     <Compile Include="Controllers\UsuarioManager.cs" />
     <Compile Include="CustomErrors\frmError.aspx.cs">
       <DependentUpon>frmError.aspx</DependentUpon>
@@ -296,6 +299,7 @@
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Ruta.cs" />
     <Compile Include="Models\TarjetaModel.cs" />
+    <Compile Include="Models\Transaccion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
@@ -366,6 +370,20 @@
     </Compile>
     <Compile Include="Views\frmRecarga.aspx.designer.cs">
       <DependentUpon>frmRecarga.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmReportePagos.aspx.cs">
+      <DependentUpon>frmReportePagos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReportePagos.aspx.designer.cs">
+      <DependentUpon>frmReportePagos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmReporteViajes.aspx.cs">
+      <DependentUpon>frmReporteViajes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReporteViajes.aspx.designer.cs">
+      <DependentUpon>frmReporteViajes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmRuta.aspx.cs">
       <DependentUpon>frmRuta.aspx</DependentUpon>

@@ -21,6 +21,8 @@ namespace WebApiSegura.Models
         public System.DateTime Fecha { get; set; }
         public decimal Monto { get; set; }
         public string Estado { get; set; }
+
+        public string Descripcion { get; set; }
     
         public virtual Persona Persona { get; set; }
         public virtual Ruta Ruta { get; set; }

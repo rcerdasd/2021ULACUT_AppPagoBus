@@ -57,6 +57,7 @@
                         <li><a id="navBarTarjeta" runat="server" href="~/Views/frmPago.aspx">Metodos de pago</a></li>
                         <li><a id="navBarCliente" runat="server" href="~/Views/frmCliente.aspx">Clientes</a></li>
                         <li><a id="navBarRutaCliente" runat="server" href="~/Views/FrmRutaCliente.aspx">Rutas</a></li>
+                        <li><a id="navBarReporte" runat="server" href="~/Views/frmReporteViajes.aspx">Reporte pagos y viajes</a></li>
                         <li><asp:LinkButton ID="lnkCerrarSesion" OnClick="lnkCerrarSesion_Click" runat="server">Cerrar sesion</asp:LinkButton></li>
 
                     </ul>
