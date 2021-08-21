@@ -2,6 +2,7 @@
 using AppPagoBus.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -33,14 +34,18 @@ namespace AppPagoBus
             {
                 try
                 {
+
                     PersonaManager personaManager = new PersonaManager();
+                    var engCultureInfo = CultureInfo.CreateSpecificCulture("en-US");
 
                     Persona persona = new Persona()
                     {
                         Nombre = txtNombre.Text,
                         Apellido = txtApellido.Text,
                         Identificacion = txtIdentificacion.Text,
-                        FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text),
+                        //FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text, "dd/MM/yyy"),
+                        //FechaNacimiento = DateTime.ParseExact(txtFechaNacimiento.Text+" 00:00:00","dd/MM/yyy HH:mm:ss",engCultureInfo),
+                        FechaNacimiento = cldFechaNacimiento.SelectedDate,
                         Usuario = txtUsername.Text,
                         Contrasena = txtPassword.Text,
                         Email = txtEmail.Text,
@@ -50,20 +55,49 @@ namespace AppPagoBus
 
                     Persona usuarioRegistrado = await personaManager.Registrar(persona);
 
-                    if (!string.IsNullOrEmpty(persona.Identificacion))
+                    if (!string.IsNullOrEmpty(usuarioRegistrado.Identificacion))
                         Response.Redirect("Login.aspx");
                     else
                     {
                         lblStatus.Text = "Hubo un error al registrar el usuario.";
                         lblStatus.Visible = true;
                     }
+
+
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     lblStatus.Text = "Hubo un error al registrar el usuario.";
                     lblStatus.Visible = true;
                 }
             }
+        }
+
+        protected void cvPasswordLength_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (args.Value.Length >= 9)
+                args.IsValid = true;
+            else
+                args.IsValid = false;
+        }
+
+        protected void cvCalendario_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            int index = txtFechaNacimiento.Text.Length - 4;
+            int year = Convert.ToInt32(txtFechaNacimiento.Text.Substring(index, 4));
+
+            if (year <= (DateTime.Now.Year - 13))
+                args.IsValid = true;
+            else
+                args.IsValid = false;
+        }
+
+        protected void cvPasswordLengthValidation_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (args.Value.Length >= 8)
+                args.IsValid = true;
+            else
+                args.IsValid = false;
         }
     }
 }

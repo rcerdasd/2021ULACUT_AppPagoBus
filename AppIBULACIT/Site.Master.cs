@@ -27,7 +27,7 @@ namespace AppPagoBus
 
         protected void bajoSaldo()
         {
-            if (Convert.ToDecimal(Session["Saldo"].ToString()) < 1000)
+            if ((Convert.ToDecimal(Session["Saldo"].ToString()) < 1000) && (Session["Tipo"].ToString()=="2"))
             {
                 lblAlerta.Text = "Saldo bajo. Considere recargar.";
                 lblAlerta.Visible = true;
