@@ -155,6 +155,7 @@ hr {
                     <asp:TextBox ID="txtIdentificacion" Placeholder="Ingrese su identificacion" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvIdentificacion" runat="server" 
                         ErrorMessage="La identificacion es requerida" ControlToValidate="txtIdentificacion" ForeColor="Maroon"></asp:RequiredFieldValidator>
+                    <asp:CustomValidator ID="cvPasswordLength" OnServerValidate="cvPasswordLength_ServerValidate" ControlToValidate="txtIdentificacion" runat="server" ErrorMessage="La identificacion no puede tener menos de 9 caracteres"></asp:CustomValidator>
                     <asp:TextBox ID="txtNombre" Placeholder="Ingrese su nombre" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvNombre" runat="server" 
                         ErrorMessage="El nombre es requerido" ControlToValidate="txtNombre" ForeColor="Maroon"></asp:RequiredFieldValidator>
@@ -164,16 +165,19 @@ hr {
                     <asp:TextBox ID="txtEmail" Placeholder="Ingrese su correo electronico" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
                         ErrorMessage="El correo electronico es requerido" ControlToValidate="txtEmail" ForeColor="Maroon"></asp:RequiredFieldValidator>
-                    <asp:TextBox ID="txtFechaNacimiento" Placeholder="Ingrese su fecha de nacimiento" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaNacimiento" Enabled="true" Placeholder="Ingrese su fecha de nacimiento" runat="server"></asp:TextBox>
                     <asp:Button ID="btnFechaNac" OnClick="btnFechaNac_Click" runat="server" Text="Seleccionar fecha" CausesValidation="false" />
                     <asp:Calendar ID="cldFechaNacimiento" OnSelectionChanged="cldFechaNacimiento_SelectionChanged" runat="server" Visible="false">
                     </asp:Calendar>
+                    <asp:CustomValidator ID="cvCalendario" ControlToValidate="txtFechaNacimiento" runat="server" OnServerValidate="cvCalendario_ServerValidate" ErrorMessage="Solo usuarios mayores de 13 años pueden registrarse"></asp:CustomValidator>
+
                     <asp:RequiredFieldValidator ID="rfvFechaNac" runat="server" ForeColor="Maroon"
                         ErrorMessage="La fecha de nacimiento es requerida" ControlToValidate="txtFechaNacimiento"></asp:RequiredFieldValidator>
                     <asp:TextBox ID="txtUsername" Placeholder="Ingrese su nombre de usuario" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ForeColor="Maroon"
                         ErrorMessage="El nombre de usuario es requerido" ControlToValidate="txtUsername"></asp:RequiredFieldValidator>
                     <asp:TextBox ID="txtPassword" Placeholder="Ingrese su password" TextMode="Password" runat="server"></asp:TextBox>
+                    <asp:CustomValidator ID="cvPasswordLengthValidation" ControlToValidate="txtPassword" OnServerValidate="cvPasswordLengthValidation_ServerValidate" runat="server" ErrorMessage="La contraseña debe tener minimo 8 caracteres"></asp:CustomValidator>
                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ForeColor="Maroon"
                         ErrorMessage="El password es requerido" ControlToValidate="txtPassword"></asp:RequiredFieldValidator>
                     <asp:TextBox ID="txtConfirmarPassword" Placeholder="Confirme su password" TextMode="Password" runat="server"></asp:TextBox>

@@ -58,7 +58,7 @@ namespace AppIBULACIT.Views
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtRuta.Text = row.Cells[2].Text.Trim();
                     txtCodigoRuta.Text = row.Cells[0].Text.Trim();
-                    listaTarjetas = await tarjetaManager.GetAll(Session["Token"].ToString());
+                    listaTarjetas = await tarjetaManager.GetId(Session["Token"].ToString(), Session["CodigoUsuario"].ToString());
                     ddlTarjeta.DataSource = listaTarjetas.ToList();
                     ddlTarjeta.DataTextField = "Numero";
                     ddlTarjeta.DataValueField = "Codigo";

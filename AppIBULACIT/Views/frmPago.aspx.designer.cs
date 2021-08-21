@@ -123,6 +123,24 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.TextBox txtNumero;
 
         /// <summary>
+        /// cvNumeroLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvNumeroLength;
+
+        /// <summary>
+        /// regNumericNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regNumericNum;
+
+        /// <summary>
         /// ltrCcv control.
         /// </summary>
         /// <remarks>

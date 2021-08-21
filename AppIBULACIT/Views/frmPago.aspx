@@ -36,7 +36,7 @@
             <asp:BoundField HeaderText="Numero" DataField="Numero" />
             <asp:BoundField HeaderText="CCV" DataField="CCV" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
             <asp:BoundField HeaderText="MesExpiracion" DataField="MesExpiracion" />
-                        <asp:BoundField HeaderText="Anio Expiracion" DataField="AnioExpiracion" />
+                        <asp:BoundField HeaderText="Año Expiracion" DataField="AnioExpiracion" />
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Predeterminado" DataField="Predeterminado" />
             <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
@@ -87,7 +87,10 @@
                             <td>
                                 <asp:Literal ID="ltrNumero" Text="Numero" runat="server" /></td>
                             <td>
-                                <asp:TextBox ID="txtNumero" runat="server" CssClass="form-control" /></td>
+                                <asp:TextBox ID="txtNumero" runat="server" CssClass="form-control" />
+                                <asp:CustomValidator ID="cvNumeroLength" ControlToValidate="txtNumero" OnServerValidate="cvNumeroLength_ServerValidate" runat="server" ErrorMessage="Debe ingresar al menos 15 digitos"></asp:CustomValidator>
+                                <asp:RegularExpressionValidator ID="regNumericNum" ControlToValidate="txtNumero" ValidationExpression="^\d+$" runat="server" ErrorMessage="Solo se puede ingresar numeros"></asp:RegularExpressionValidator>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -105,7 +108,9 @@
                             <td>
                                 <asp:Literal ID="ltrAnioExpiracion" Text="Anio Expiracion" runat="server" /></td>
                             <td>
-                                <asp:TextBox ID="txtAnioExpiracion" runat="server" CssClass="form-control" /></td>
+                                <asp:TextBox ID="txtAnioExpiracion" runat="server" CssClass="form-control" />
+                                
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -129,7 +134,7 @@
                     <asp:Label ID="lblResultado" ForeColor="Maroon" Visible="False" runat="server" />
                 </div>
                 <div class="modal-footer">
-                    <asp:LinkButton type="button" CssClass="btn btn-success" ID="btnAceptarMant" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-ok'></span> Aceptar" OnClick="btnAceptarMant_Click" />
+                    <asp:LinkButton type="button" CausesValidation="true" CssClass="btn btn-success" ID="btnAceptarMant" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-ok'></span> Aceptar" OnClick="btnAceptarMant_Click" />
                     <asp:LinkButton type="button" CssClass="btn btn-danger" ID="btnCancelarMant" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-remove'></span> Cerrar" OnClick="btnCancelarMant_Click" />
                 </div>
             </div>

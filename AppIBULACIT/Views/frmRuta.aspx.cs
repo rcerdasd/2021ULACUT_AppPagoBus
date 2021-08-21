@@ -60,7 +60,7 @@ namespace AppPagoBus.Views
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
                     txtCosto.Text = row.Cells[1].Text.Trim();
                     txtDescripcion.Text = row.Cells[2].Text.Trim();
-                    txtProvincia.Text = row.Cells[3].Text.Trim();
+                    ddlProvincia.SelectedValue = row.Cells[3].Text.Trim();
                     btnAceptarMant.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
                     break;
@@ -104,11 +104,9 @@ namespace AppPagoBus.Views
             txtCosto.Visible = true;
             ltrProvincia.Visible = true;
             ddlProvincia.Visible = true;
-            txtProvincia.Visible = true;
             txtCodigoMant.Text = string.Empty;
             txtDescripcion.Text = string.Empty;
             txtCosto.Text = string.Empty;
-            txtProvincia.Text = string.Empty;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento();});", true);
         }
 
@@ -130,64 +128,95 @@ namespace AppPagoBus.Views
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseModal(); });", true);
         }
 
+        protected bool isNum(string num)
+        {
+            try
+            {
+                Convert.ToInt64(num);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+        }
+
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(txtCodigoMant.Text))
+                if (isNum(txtCosto.Text))
                 {
-                    Ruta ruta = new Ruta()
+                    if (Convert.ToInt32(txtCosto.Text.Trim()) > 50)
                     {
-                        Costo = Convert.ToInt32(txtCosto.Text),
-                        Descripcion = txtDescripcion.Text,
-                        Provincia = txtProvincia.Text
-                    };
+                        if (string.IsNullOrEmpty(txtCodigoMant.Text))
+                        {
+                            Ruta ruta = new Ruta()
+                            {
+                                Costo = Convert.ToInt32(txtCosto.Text),
+                                Descripcion = txtDescripcion.Text,
+                                Provincia = ddlProvincia.SelectedValue
+                            };
 
-                    Ruta rutaIngresada = await rutaManager.Ingresar(ruta, Session["Token"].ToString());
+                            Ruta rutaIngresada = await rutaManager.Ingresar(ruta, Session["Token"].ToString());
 
-                    if (!string.IsNullOrEmpty(rutaIngresada.Descripcion))
-                    {
-                        lblResultado.Text = "Servicio ingresado con exito";
-                        lblResultado.ForeColor = Color.Green;
-                        lblResultado.Visible = true;
-                        btnAceptarMant.Visible = false;
-                        InicializarControles();
+                            if (!string.IsNullOrEmpty(rutaIngresada.Descripcion))
+                            {
+                                lblResultado.Text = "Servicio ingresado con exito";
+                                lblResultado.ForeColor = Color.Green;
+                                lblResultado.Visible = true;
+                                btnAceptarMant.Visible = false;
+                                InicializarControles();
+                            }
+                            else
+                            {
+                                lblResultado.Text = "Hubo un error al ingresar el servicio";
+                                lblResultado.ForeColor = Color.Maroon;
+                                lblResultado.Visible = true;
+                                abrirMant();
+                            }
+                        }
+                        else
+                        {
+                            Ruta ruta = new Ruta()
+                            {
+                                Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                                Costo = Convert.ToInt32(txtCosto.Text),
+                                Descripcion = txtDescripcion.Text,
+                                Provincia = ddlProvincia.SelectedValue
+
+                            };
+
+                            Ruta rutaModificada = await rutaManager.Actualizar(ruta, Session["Token"].ToString());
+
+                            if (!string.IsNullOrEmpty(rutaModificada.Descripcion))
+                            {
+                                lblResultado.Text = "Ruta modificada con exito";
+                                lblResultado.ForeColor = Color.Green;
+                                lblResultado.Visible = true;
+                                btnAceptarMant.Visible = false;
+                                InicializarControles();
+                            }
+                            else
+                            {
+                                lblResultado.Text = "Hubo un error al modificar la ruta";
+                                lblResultado.ForeColor = Color.Maroon;
+                                lblResultado.Visible = true;
+                            }
+                        }
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al ingresar el servicio";
-                        lblResultado.ForeColor = Color.Maroon;
-                        lblResultado.Visible = true;
-                        abrirMant();
+                        openModal("El costo de la ruta no puede ser menor a 0", false);
+                        InicializarControles();
                     }
                 }
                 else
                 {
-                    Ruta ruta = new Ruta()
-                    {
-                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                        Costo = Convert.ToInt32(txtCosto.Text),
-                        Descripcion = txtDescripcion.Text,
-                        Provincia = txtProvincia.Text
-
-                    };
-
-                    Ruta rutaModificada = await rutaManager.Actualizar(ruta, Session["Token"].ToString());
-
-                    if (!string.IsNullOrEmpty(rutaModificada.Descripcion))
-                    {
-                        lblResultado.Text = "Ruta modificada con exito";
-                        lblResultado.ForeColor = Color.Green;
-                        lblResultado.Visible = true;
-                        btnAceptarMant.Visible = false;
-                        InicializarControles();
-                    }
-                    else
-                    {
-                        lblResultado.Text = "Hubo un error al modificar la ruta";
-                        lblResultado.ForeColor = Color.Maroon;
-                        lblResultado.Visible = true;
-                    }
+                    openModal("Solo ingrese numeros en el costo", false);
+                    InicializarControles();
                 }
             }
             catch (Exception)
@@ -200,15 +229,19 @@ namespace AppPagoBus.Views
             }
         }
 
+        protected void openModal(string message, bool btnAceptar)
+        {
+            btnAceptarModal.Visible = btnAceptar;
+            ltrModalMensaje.Text = message;
+            ltrModalMensaje.Visible = true;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function(){openModal(); } );", true);
+        }
+
         protected void btnCancelarMant_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {​​​ CloseMantenimiento(); }​​​);", true);
         }
 
-        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtProvincia.Text = ddlProvincia.SelectedValue.ToString();
-            
-        }
+
     }
 }

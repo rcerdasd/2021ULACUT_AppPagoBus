@@ -33,6 +33,15 @@ namespace AppPagoBus
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIdentificacion;
 
         /// <summary>
+        /// cvPasswordLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvPasswordLength;
+
+        /// <summary>
         /// txtNombre control.
         /// </summary>
         /// <remarks>
@@ -114,6 +123,15 @@ namespace AppPagoBus
         protected global::System.Web.UI.WebControls.Calendar cldFechaNacimiento;
 
         /// <summary>
+        /// cvCalendario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvCalendario;
+
+        /// <summary>
         /// rfvFechaNac control.
         /// </summary>
         /// <remarks>
@@ -148,6 +166,15 @@ namespace AppPagoBus
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
+
+        /// <summary>
+        /// cvPasswordLengthValidation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvPasswordLengthValidation;
 
         /// <summary>
         /// rfvPassword control.

@@ -95,7 +95,7 @@ namespace WebApiSegura.Controllers
                     sqlCommand.Parameters.AddWithValue("@Email", persona.Email);
                     sqlCommand.Parameters.AddWithValue("@Tipo", persona.Tipo);
                     sqlCommand.Parameters.AddWithValue("@Saldo", persona.Saldo);
-                    sqlCommand.Parameters.AddWithValue("@Estado", persona.Estado);
+                    sqlCommand.Parameters.AddWithValue("@Estado", "a");
 
 
                     sqlConnection.Open();

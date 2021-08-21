@@ -126,73 +126,128 @@ namespace AppIBULACIT.Views
             InicializarControles();
         }
 
+        protected bool isNum(string num)
+        {
+            try
+            {
+                Convert.ToInt64(num);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            
+        }
+
+        private bool validarLargo(string num)
+        {
+            if (num.Length >= 15)
+                return true;
+            else
+                return false;
+        }
+
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(txtCodigoMant.Text))
+                /* DateTime fecha = new DateTime();
+                 int month = Convert.ToInt32(txtMesExpiracion.Text.Trim());
+                 fecha.Month.
+                 fecha.AddYears(Convert.ToInt32(txtAnioExpiracion.Text.Trim()));
+                 fecha.AddDays(1);*/
+                if (!validarLargo(txtNumero.Text))
                 {
-                    TarjetaModel tarjeta = new TarjetaModel()
+                    openModal("El numero de la tarjeta debe ser de al menos 15 digitos", false);
+                    InicializarControles();
+                }
+                else
+                {
+                    if (!isNum(txtNumero.Text))
                     {
-                        Numero = txtNumero.Text,
-                        CCV = txtCcv.Text,
-                        MesExpiracion = Convert.ToInt32(txtMesExpiracion.Text),
-                        AnioExpiracion = Convert.ToInt32(txtAnioExpiracion.Text),
-                        Nombre = txtNombre.Text,
-                        Predeterminado = ddlPredeterminado.SelectedValue,
-                        CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())
-                    };
-
-                    TarjetaModel tarjetaIngresada = await tarjetaManager.Ingresar(tarjeta, Session["Token"].ToString());
-
-                    if (!string.IsNullOrEmpty(tarjetaIngresada.Nombre))
-                    {
-                        lblResultado.Text = "Tarjeta ingresada con exito";
-                        lblResultado.ForeColor = Color.Green;
-                        lblResultado.Visible = true;
-                        btnAceptarMant.Visible = false;
+                        openModal("Solo ingrese digitos en el numero de la tarjeta", false);
                         InicializarControles();
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al ingresar la tarjeta";
-                        lblResultado.ForeColor = Color.Maroon;
-                        lblResultado.Visible = true;
-                        abrirMant();
+                        if ((Convert.ToInt32(txtAnioExpiracion.Text) == DateTime.Now.Year && Convert.ToInt32(txtMesExpiracion.Text) <= DateTime.Now.Month) || Convert.ToInt32(txtAnioExpiracion.Text) < DateTime.Now.Year)
+                        {
+                            openModal("La tarjeta esta expirada", false);
+                            InicializarControles();
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(txtCodigoMant.Text))
+                            {
+                                TarjetaModel tarjeta = new TarjetaModel()
+                                {
+                                    Numero = txtNumero.Text,
+                                    CCV = txtCcv.Text,
+                                    MesExpiracion = Convert.ToInt32(txtMesExpiracion.Text),
+                                    AnioExpiracion = Convert.ToInt32(txtAnioExpiracion.Text),
+                                    Nombre = txtNombre.Text,
+                                    Predeterminado = ddlPredeterminado.SelectedValue,
+                                    CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())
+                                };
+
+                                TarjetaModel tarjetaIngresada = await tarjetaManager.Ingresar(tarjeta, Session["Token"].ToString());
+
+                                if (!string.IsNullOrEmpty(tarjetaIngresada.Nombre))
+                                {
+                                    lblResultado.Text = "Tarjeta ingresada con exito";
+                                    lblResultado.ForeColor = Color.Green;
+                                    lblResultado.Visible = true;
+                                    btnAceptarMant.Visible = false;
+                                    InicializarControles();
+                                }
+                                else
+                                {
+                                    lblResultado.Text = "Hubo un error al ingresar la tarjeta";
+                                    lblResultado.ForeColor = Color.Maroon;
+                                    lblResultado.Visible = true;
+                                    abrirMant();
+                                }
+                            }
+                            else//Modificar
+                            {
+                                TarjetaModel tarjeta = new TarjetaModel()
+                                {
+                                    Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                                    Numero = txtNumero.Text,
+                                    CCV = txtCcv.Text,
+                                    MesExpiracion = Convert.ToInt32(txtMesExpiracion.Text),
+                                    AnioExpiracion = Convert.ToInt32(txtAnioExpiracion.Text),
+                                    Nombre = txtNombre.Text,
+                                    Predeterminado = ddlPredeterminado.SelectedValue,
+                                    CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())
+
+                                };
+
+                                TarjetaModel tarjetaModificada = await tarjetaManager.Actualizar(tarjeta, Session["Token"].ToString());
+
+                                if (!string.IsNullOrEmpty(tarjetaModificada.Nombre))
+                                {
+                                    lblResultado.Text = "TarjetaModel modificada con exito";
+                                    lblResultado.ForeColor = Color.Green;
+                                    lblResultado.Visible = true;
+                                    btnAceptarMant.Visible = false;
+                                    InicializarControles();
+                                }
+                                else
+                                {
+                                    lblResultado.Text = "Hubo un error al modificar la tarjeta";
+                                    lblResultado.ForeColor = Color.Maroon;
+                                    lblResultado.Visible = true;
+                                }
+                            }
+                        }
                     }
                 }
-                else//Modificar
-                {
-                    TarjetaModel tarjeta = new TarjetaModel()
-                    {
-                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                        Numero = txtNumero.Text,
-                        CCV = txtCcv.Text,
-                        MesExpiracion = Convert.ToInt32(txtMesExpiracion.Text),
-                        AnioExpiracion = Convert.ToInt32(txtAnioExpiracion.Text),
-                        Nombre = txtNombre.Text,
-                        Predeterminado = ddlPredeterminado.SelectedValue,
-                        CodigoCliente = Convert.ToInt32(Session["CodigoUsuario"].ToString())
 
-                    };
 
-                    TarjetaModel tarjetaModificada = await tarjetaManager.Actualizar(tarjeta, Session["Token"].ToString());
 
-                    if (!string.IsNullOrEmpty(tarjetaModificada.Nombre))
-                    {
-                        lblResultado.Text = "TarjetaModel modificada con exito";
-                        lblResultado.ForeColor = Color.Green;
-                        lblResultado.Visible = true;
-                        btnAceptarMant.Visible = false;
-                        InicializarControles();
-                    }
-                    else
-                    {
-                        lblResultado.Text = "Hubo un error al modificar la tarjeta";
-                        lblResultado.ForeColor = Color.Maroon;
-                        lblResultado.Visible = true;
-                    }
-                }
             }
             catch (Exception)
             {
@@ -204,10 +259,25 @@ namespace AppIBULACIT.Views
             }
         }
 
+        protected void openModal(string message, bool btnAceptar)
+        {
+            btnAceptarModal.Visible = btnAceptar;
+            ltrModalMensaje.Text = message;
+            ltrModalMensaje.Visible = true;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function(){openModal(); } );", true);
+        }
+
         protected void btnCancelarMant_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() {​​​ CloseMantenimiento(); }​​​);", true);
         }
 
+        protected void cvNumeroLength_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (args.Value.Length >= 15)
+                args.IsValid = true;
+            else
+                args.IsValid = false;
+        }
     }
 }

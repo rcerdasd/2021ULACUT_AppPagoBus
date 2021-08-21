@@ -28,10 +28,8 @@
         <Columns>
             <asp:BoundField HeaderText="Codigo de la transaccion" DataField="Codigo" />
             <asp:BoundField HeaderText="Ruta" DataField="Descripcion"/>
-            <asp:BoundField HeaderText="Codigo tarjeta" DataField="TarjetaClienteId" />
             <asp:BoundField HeaderText="Fecha" DataField="Fecha" />
             <asp:BoundField HeaderText="Monto" DataField="Monto" />
-            <asp:BoundField HeaderText="Estado" DataField="Estado"/>
         </Columns>
     </asp:GridView>
     <br />
